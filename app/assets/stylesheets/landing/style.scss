@@ -335,7 +335,7 @@ section .container {position:relative;}
 
 /* SECTION - HOME */
 section.homepage {
-	background-image:assets-url(../img/landing-background.png);
+	background-image:asset-url('/images/img/landing-background.png');
 	background-position:top center;
 	background-size:cover;
 	position:relative;
