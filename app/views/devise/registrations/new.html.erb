@@ -1,39 +1,60 @@
-<h2>Sign up</h2>
+<div class="sign-up-background" style="height:100%; width: 100%;">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<div class="container">
+    <div class="col-lg-6 col-md-12 center-block">
+     <h2>Sign up</h2>
+      <div class="wow fadeInLeft animated" >
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <% if devise_error_messages!.present? %>
+        <div class="alert alert-info" role="alert" style="list-style-type: none;">
+        <%= devise_error_messages! %>
+        <% end %>
+        </div>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true, :class => 'form-control' %>
-  </div>
+        <div class="form-group">
+          <%= f.label :first_name %><br />
+          <%= f.text_field :first_name, autofocus: true, :class => 'form-control' %>
+        </div>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, :class => 'form-control' %>
-  </div>
+        <div class="form-group">
+          <%= f.label :last_name %><br />
+          <%= f.text_field :last_name, :class => 'form-control' %>
+        </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, :class => 'form-control' %>
-  </div>
+        <div class="form-group">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, :class => 'form-control' %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off", :class => 'form-control' %>
-  </div>
+        <div class="form-group">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "off", :class => 'form-control' %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control' %>
-  </div>
+        <div class="form-group">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control' %>
+        </div>
+        
+        <div class="form-group">
+       <%= select_tag("user[role]", options_for_select(
+                      [
+                        ['Event Organizer', "organizer"],
+                        ['Vendor', "vendor"],
+                        ['Staff', "staff"]
+                      ], 3
+                    ), :class => 'form-control' )%>
+        </div>
+  
+          <%= f.submit "Sign up", :class => "btn btn-primary" %>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+      <% end %>
 
-<%= render "devise/shared/links" %>
+      <%= render "devise/shared/links" %>
+      </div>
+    </div>
+</div>
+</div>
