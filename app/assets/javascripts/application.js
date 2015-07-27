@@ -15,6 +15,8 @@
 //= require wow
 //= require twitter/bootstrap
 //= require turbolinks
+//= require twitter/bootstrap/tooltip
+//= require twitter/bootstrap/popover
 //= require react
 //= require react_ujs
 //= require components
