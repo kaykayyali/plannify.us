@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'jquery-easing-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use postgresql as the database for Active Record
@@ -16,6 +16,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'wow-rails'
 gem "jquery-validation-rails"
 gem "twitter-bootstrap-rails"
+gem 'jquery-easing-rails'
+gem "font-awesome-rails"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -26,7 +28,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'react-rails', '~> 1.0'
 gem 'devise'
-gem "font-awesome-rails"
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 

@@ -49,11 +49,12 @@
 			<nav>
 			<ul class="nav">
 				<li><a href="#home">Home</a></li>
-				<li><a href="#features">How we work</a></li>
-				<li><a href="#testimonials">Testimonials</a></li>			
+				<li><a href="#features">How we work</a></li>		
 				<li><a href="#contact-page">Contact</a></li>
 				<!-- Temp Sign out -->
+				<% if current_user.present? %>
 				<li><a href="<%=destroy_user_session_path%>" data-method="delete">Sign-Out</a></li>
+				<% end %>
 			</ul>
 			</nav>
 		</div>	
@@ -153,80 +154,6 @@
 </section>
 <!-- end features -->
 
-<!-- BEGIN TESTIMONIALS
-================================================== -->
-<section id="testimonials" class="testimonials whitetext">
-	<div class="wrapsection">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row text-center">
-				<div id="wowtestim" class="owl-carousel">
-				
-					<!-- testimonial 1 -->
-					<div class="item">				
-						<a class="client-image">				
-						<img src="http://wowthemes.net/demo/salique/salique-boxed/images/temp/avatar4.png" class="avatar" alt="Client"/>
-						</a>				
-						<h1 class="client-name uppercase">Erny Keirstead </h1>				
-						<h3 class="client-pos uppercase">Hypnos Theme </h3>				
-						<p class="client-msg">
-							 Great themes with equally amazing customer service to go with it. Very prompt responses and very knowledgable staff that truly cares about their customer. I stand 100% behind this website and will make sure to recommend it to my friends.
-						</p>
-					</div>
-					
-					<!-- testimonial 2 -->
-					<div class="item">				
-						<a class="client-image">				
-						<img src="http://wowthemes.net/demo/salique/salique-boxed/images/temp/avatar2.png" class="avatar" alt="Client"/>
-						</a>				
-						<h1 class="client-name uppercase">Rania Macfarlane </h1>				
-						<h3 class="client-pos uppercase">Apulum Theme </h3>
-						<p class="client-msg">
-							 This is a great theme for multipurpose use. Great features, catchy look. Also, I have on a few occasions needed to contact the support team, and they have been extremely helpful. I'm new to navigating these things so this has been invaluable!
-						</p>
-					</div>
-					
-					<!-- testimonial 3 -->
-					<div class="item">				
-						<a class="client-image">				
-						<img src="http://wowthemes.net/demo/salique/salique-boxed/images/temp/avatar5.png" class="avatar" alt="Client"/>
-						</a>				
-						<h1 class="client-name uppercase">Sharl White </h1>				
-						<h3 class="client-pos uppercase">Vesta Theme </h3>				
-						<p class="client-msg">
-							 The support... I can only say it's awesome. You make a product and you help people out any way you can even if it means that you have to log in on their dashboard to sort out any problems that customer might have. Simply Outstanding!
-						</p>
-					</div>
-					<!-- end testimonial 3 -->
-					
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- END TESTIMONIALS -->
-
-<!-- BEGIN PRESENTATION
-================================================== -->
-<section id="presentation">
-	<div class="wrapsection">
-		<div class="container">
-			<div class="sectionhead">
-				<h1>Perfect Marketing Theme</h1>
-				<div class="smallsep">
-				</div>
-				<p class="lead">
-					 We are especially beautiful and fully responsive.
-				</p>
-			</div>
-			<p class="max80 wow bounceIn animated" data-wow-delay="0.1s">
-				 Lorem ipsum dolor sit amet, consectetur Morbi sagittis, sem quis lacinia faucibus, orci ipsum gravida tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, sem quis lacinia faucibus, orci ipsum gravida tortor. Nulla varius consequat magna, id molestie ipsum volutpat quis. Suspendisse consectetur fringilla suctus. Pellentesque ipsum erat, facilisis ut venenatis eu, sodales vel dolor quis lacinia faucibus, orci ipsum gravida tortor.
-			</p>
-			<br/><img src="http://www.wowthemes.net/demo/calypso/img/demo/desktop3.png" alt="" class="img-responsive pxauto wow bounceIn animatedUp" style="margin-bottom:-60px;" data-wow-delay="0.2s">
-		</div>
-	</div>
-</section>
-<!-- END PRESENTATION -->
 
 
 <!-- BEGIN CONTACT-PAGE
