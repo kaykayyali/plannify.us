@@ -323,19 +323,19 @@ section .container {position:relative;}
 
 /* SECTION - BACKGROUNDS */
 .download {
-	background-image:url(../img/dummyimage.jpg);
+	background-image:asset-data-url("stage-crew.jpg");
 }
 .testimonials {
-	background-image:url(../img/dummyimage.jpg);
+	background-image:asset-data-url("stage-crew.jpg");
 }
 .contact-page {
-	background-image: url(../img/dummyimage.jpg);
+	background-image: asset-data-url("stage-crew.jpg");
 }
 
 
 /* SECTION - HOME */
 section.homepage {
-	background-image:asset-url('/images/img/landing-background.png');
+	background-image: asset-data-url("landing-background.png");
 	background-position:top center;
 	background-size:cover;
 	position:relative;
@@ -376,7 +376,7 @@ section.homepage {
 	
 }
 .homepage .small-text {
-	font-size:16px;
+	font-size:20px;
 	line-height:38px;
 	color:rgba(255,255,255,0.6);
 	font-weight:300;

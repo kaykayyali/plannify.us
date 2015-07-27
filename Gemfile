@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'wow-rails'
 gem "jquery-validation-rails"
+gem "twitter-bootstrap-rails"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -27,7 +28,7 @@ gem 'react-rails', '~> 1.0'
 gem 'devise'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem "twitter-bootstrap-rails"
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'
