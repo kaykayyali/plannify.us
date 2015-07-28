@@ -19,7 +19,16 @@ class OrganizersController < ApplicationController
 		else
 			redirect_to organizers_addevent_path
 		end
-			
+	end
+
+	def event_show
+		event = Event.find_by(:id => params[:id])
+		if event.user_id == current_user.id
+			@event = event
+			render 'showEvent'
+		else 
+			redirect_to '/'
+		end
 		
 	end
 
@@ -32,6 +41,6 @@ class OrganizersController < ApplicationController
 	end
 
 		def event_params
-		params.require(:event).permit(:name, :date, :venue, :address, :zipcode, :city, :state)
+		params.require(:event).permit(:name, :date, :venue, :address, :zipcode, :city, :state, :time)
 	end
 end

@@ -2,13 +2,40 @@
 
 <%= render './partials/header'  %>
 <div class="container">
-	<h1>Welcome <%= current_user.first_name  %></h1>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="jumbotron"><h1>Welcome <%= current_user.first_name  %></h1></div>
+		</div>
+	</div>
+	
+	
+	<div class="panel panel-default light-blue">
+		<div class="panel-body">
+			
+				<h3>Here are your events</h3> <button class="btn btn-primary btn-lg" ><a href="<%= organizers_addevent_path  %>" style="color:white;">Add New Event</a></button>
+				<% @events.each do |event| %>
+					<div class="col-lg-3">
+						<a href="/organizers/showevent/<%= event.id %>" style='color:black;'><div class="panel panel-default">
+							<div class="panel-heading">
+								<h4><%= event.name  %> <br> <small><%= event.venue  %></small></h4>
+							</div>
+							<div class="panel-body">
+								
+								<%= pretty_date(event.date)  %> <%= event.time.strftime("at %l:%m%p")  %><br>
+								<%= event.city  %>, <%= event.state  %> <br>
+								<%= event.address %>
+								<%= event.zipcode  %>
+								
+								
+							</div>
+						</div></a>
+					</div>
+				<% end %>
+		
+		</div>
 
-		<% @events.each do |event| %>
-			<ul>
-				<li><%= event.name  %></li>
-			</ul>
-		<% end %>
+	</div>
+	
 
-	<a href="<%= organizers_addevent_path  %>">Add New Event</a>
+	
 </div>
