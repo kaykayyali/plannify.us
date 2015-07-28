@@ -1,0 +1,29 @@
+
+
+
+<div class="container wow fadeInLeft animated">
+	<br>
+
+	<div class="row">
+	
+	</div>
+	
+	
+	<div class="panel panel-default light-blue panel-border-black ">
+	<div class="panel-heading">
+		<h2><%= @event.name  %></h2> 
+		
+	</div>
+		<div class="panel-body">
+				<%= pretty_date(@event.date)  %> <%= @event.time.strftime("at %l:%m%p")  %><br>
+				<%= @event.city  %>, <%= @event.state  %> <br>
+				<%= @event.address %>
+				<%= @event.zipcode  %> 
+		</div>
+
+	</div>
+	<button class="btn btn-primary"><a href="<%= organizers_path  %>">Back to events</a></button>
+	
+
+	
+</div>
