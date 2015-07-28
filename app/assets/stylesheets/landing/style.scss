@@ -323,19 +323,19 @@ section .container {position:relative;}
 
 /* SECTION - BACKGROUNDS */
 .download {
-	background-image:asset-data-url("stage-crew.jpg");
+	background-image:asset-data-url("landing-background.gif");
 }
 .testimonials {
-	background-image:asset-data-url("stage-crew.jpg");
+	background-image:asset-data-url("landing-background.gif");
 }
 .contact-page {
-	background-image: asset-data-url("stage-crew.jpg");
+	background-image: asset-data-url("landing-background.gif");
 }
 
 
 /* SECTION - HOME */
 section.homepage {
-	background-image: asset-data-url("landing-background.png");
+	background-image: asset-data-url("landing-background.gif");
 	background-position:top center;
 	background-size:cover;
 	position:relative;

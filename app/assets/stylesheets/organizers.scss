@@ -4,6 +4,17 @@
 .light-blue {
 	background-color: rgba(144,216,243,0.9)
 }
-body {
-	background-color:lightgrey;
+.panel-border-black {
+	border: 2px solid black;
+}
+.panel-border-grey {
+	border: 2px solid grey;
+}
+.ex1 { 
+	-webkit-transition: background-color 0.6s ease-out;
+	-moz-transition: background-color 0.6s ease-out;
+ 	-o-transition: background-color 0.6s ease-out; 
+} 
+.ex1:hover {
+	background-color: lightgrey;
 }
