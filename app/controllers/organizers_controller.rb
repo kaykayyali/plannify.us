@@ -12,7 +12,18 @@ class OrganizersController < ApplicationController
 		render 'new'
 	end
 	def create
-		event = current_user.events.new(event_params)
+		event = current_user.events.new()
+		event.name = params[:event]["name"]
+		event.venue = params[:event]["venue"]
+		event.zipcode = params[:event]["zipcode"]
+		event.city = params[:event]["city"]
+		event.state = params[:event]["state"]
+		event.address = params[:event]["address"]
+		
+		event.start_date = datetime_builder(params[:event]["start_date"],params[:event]["start_time"])	
+		event.end_date = datetime_builder(params[:event]["end_date"], params[:event]["end_time"])	
+		
+
 		if event.save
 			
 			redirect_to organizers_path
@@ -41,6 +52,13 @@ class OrganizersController < ApplicationController
 	end
 
 		def event_params
-		params.require(:event).permit(:name, :date, :venue, :address, :zipcode, :city, :state, :time)
+		params.require(:event).permit(:name, :start_date, :venue, :address, :zipcode, :city, :state, :start_time, :end_time, :end_time)
+	end
+	def datetime_builder(date,time)
+		
+		parse_date = Date.parse(date)
+		parse_time = Time.parse(time)
+		
+		return DateTime.new(parse_date.year, parse_date.month, parse_date.day, parse_time.hour, parse_time.min)
 	end
 end

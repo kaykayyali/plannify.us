@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'site#index'
-    get '/vendors' => 'vendors#index'
-
+    get '/vendors' => 'vendors#show'
+        
+        
+        
 
 
     get '/organizers' => 'organizers#show'

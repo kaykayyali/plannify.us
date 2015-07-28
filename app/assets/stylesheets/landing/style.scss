@@ -331,7 +331,13 @@ section .container {position:relative;}
 .contact-page {
 	background-image: asset-data-url("landing-background.gif");
 }
+.white-bg {
+	background-color: white;
+	border-bottom: 1px solid;
+	border-right: 1px solid;
+	border-left: 1px solid;
 
+}
 
 /* SECTION - HOME */
 section.homepage {

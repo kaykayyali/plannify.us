@@ -15,7 +15,8 @@
 		
 	</div>
 		<div class="panel-body">
-				<%= pretty_date(@event.date)  %> <%= @event.time.strftime("at %l:%m%p")  %><br>
+				Start time: <%= pretty_date(@event.start_date)  %> <br>
+				End time: <%= pretty_date(@event.end_date)  %> <br>
 				<%= @event.city  %>, <%= @event.state  %> <br>
 				<%= @event.address %>
 				<%= @event.zipcode  %> 

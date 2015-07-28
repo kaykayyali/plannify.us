@@ -21,10 +21,14 @@
 	background-color: lightgrey;
 }
 
-a {
+button > a {
 	color: white;
 }
 #header {
 	padding-top:20px;
-	border-bottom: 1px solid;
+	
+}
+hr {
+	margin-bottom: 5px;
+	margin-top: 5px;
 }
