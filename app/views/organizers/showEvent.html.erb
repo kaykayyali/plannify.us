@@ -6,7 +6,15 @@
 	<br>
 	<div class="panel panel-default  panel-border-black">
 			<div class="panel-heading">
-				<h4>Details for <%= @event.name %></h4>
+				<div class="row">
+					<div class="col-md-6">
+					<h4>Details for <%= @event.name %></h4>
+					</div>
+
+					<div class="col-md-6">
+					<h4>Comments</h4>	
+					</div>
+				</div>
 			</div>
 
 			<div class="panel-body">
@@ -14,23 +22,27 @@
 					<p> 
 						
 						<h4>Start time: <%= pretty_date(@event.start_date)  %></h4> 
-						<br>
 						<h4>End time: <%= pretty_date(@event.end_date)  %></h4> 
-						<br>
 						<h4>City: <%= @event.city  %>, <%= @event.state  %></h4> 
-						<br>
 						<h4>Address: <%= @event.address %></h4>
-						<br>
 						<h4>Zipcode: <%= @event.zipcode  %></h4>
 					</p>
 					<br>
+					<button onclick="showServicesModal()" data-toggle="modal" data-target="#addserviceModal" class="btn btn-default">
+						Add a service
+					</button>
+					<button onclick="showServicesModal()" data-toggle="modal" data-target="#viewservicesModal" class="btn btn-default">
+						View services
+					</button>
+					<br>
+					<hr>
+					<button onclick="goBack()" class="btn btn-primary">Go Back</button> 
 					<a href="<%= organizer_path  %>"><button class="btn btn-primary">Back to events</button></a>
 					
 				</div>
-					<div class="col-md-6 commentList">
+					<div class="col-md-6 " id="commentList">
 						
-							<h4>Comments</h4>
-							<hr>
+							
 						
 						<div class="react_comments">
 							<%= react_component('CommentBox', props = {:url => "/api/events/#{@event.id}/comments", :pollInterval => 3000}) %>
@@ -53,6 +65,73 @@
 	
 
 	
+</div>
+<div class="modal fade" id="addserviceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Service providers available for <%= @event.name  %></h4>
+      </div>
+      <div class="modal-body">
+      	<ul class="list-unstyled">
+      		<% services = Service.all %>
+      		<% services.each do |serv| %>
+      			<li>
+      				<p>
+	      				<h5><%= serv.name  %></h5>
+
+	      					<% vendors = User.where(:role => "vendor") %>
+	      					
+	      					<% vendors.each do |vendor| %>
+	      					<% p vendor.first_name %>
+	      					<ul class="list-unstyled">
+								<% if vendor.services.any? { |item| item[:name] == serv.name } %>
+									<li> 
+										<button class="btn btn-primary btn-xs"> 
+										
+											<%= vendor.name  %>
+										</button> 
+									</li>
+								<% end %>
+
+	      					</ul>
+	      					<% end %>
+	      			</p>
+      			</li>
+      		<% end %>
+      	</ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="viewservicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Services scheduled</h4>
+      </div>
+      <div class="modal-body">
+      		<% @event.services.each do |serv| %>
+      			<li>
+      				<p>
+	      				<button class="btn btn-primary">
+	      					<%= serv.name  %>
+	      				</button>
+	      			</p>
+      			</li>
+      		<% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>

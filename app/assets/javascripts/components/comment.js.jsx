@@ -4,10 +4,10 @@ var Comment = React.createClass({
     var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
     return (
       <div className="comment">
-        <h4 className="commentAuthor">
-         <span dangerouslySetInnerHTML= {{__html: this.props.user}}  />
+        <h4>
+        <div dangerouslySetInnerHTML= {{__html: this.props.user}}  />
         </h4>
-        <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
+        <div dangerouslySetInnerHTML={{__html: rawMarkup}} />
       </div>
     );
   }

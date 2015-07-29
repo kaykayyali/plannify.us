@@ -5,7 +5,17 @@ class ApiController < ApplicationController
 		commentsArray = []
 
     	event.comments.each do |comment|
-	      commentFirstname = "<a href= '/profiles/#{comment.user_id}'>" + User.find_by(:id => comment.user_id).first_name
+    		textalign = "text-align:right;"
+    		color = "color:#c7254e;"
+    		p "Made it"
+    		if User.find_by(:id =>comment.user_id).role == "organizer"
+    			textalign = "text-align:left;"
+    			color = "color:#0E8FAB;"
+    		end
+
+    		styles = "style='"+ textalign + color + "'"
+
+	      commentFirstname = "<a href= '/profiles/#{comment.user_id}'"+styles + ">" + User.find_by(:id => comment.user_id).first_name
 	      commentLastname = User.find_by(:id => comment.user_id).last_name + "</a>"
 	      commentUsername = commentFirstname + " " + commentLastname
 	      
