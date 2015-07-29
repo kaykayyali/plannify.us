@@ -4,6 +4,9 @@
 .light-blue {
 	background-color: rgba(144,216,243,0.9)
 }
+.light-red {
+	background-color: rgba(247, 238, 223, 0.5)
+}
 .panel-border-black {
 
 	border: 1px solid black;
@@ -30,6 +33,7 @@ button > a {
 	
 }
 hr {
+	border-color: lightgrey;
 	margin-bottom: 5px;
 	margin-top: 5px;
 }

@@ -7,7 +7,7 @@
 				<h3>Vendors in your area</h3>
 			</div>
 
-			<div class="panel-body light-blue">
+			<div class="panel-body light-red">
 				<ul class="list-unstyled">
 					<% @vendors.each do |vendor| %>
 						<li>
@@ -30,7 +30,7 @@
 	
 	<div class="col-lg-9">
 	<br>
-		<div class="panel panel-default light-blue panel-border-black">
+		<div class="panel panel-default light-red panel-border-black">
 			<div class="panel-heading clearfix">
 				<a href="<%= organizers_addevent_path  %>" style="color:white;"><button class="btn btn-primary btn-lg pull-right" >Add New Event</button></a>
 
@@ -38,33 +38,51 @@
 					<br>
 				</div>
 				<div class="panel-body">
-					<% if @events.present? %>
-					<% @events.each do |event| %>
-						<div class="col-lg-4">
+				<div class="container-fluid">
+
+					
+						<% if @events.present? %>
+						<% columncounter = 0 %>
+						<% @events.each do |event| %>
+						<% if columncounter  == 0 %>
+							<div class="row">
 							
-								<div class="panel panel-default panel-border-grey ex1 text-center justify-block box-shadow ">
-									<div class="panel-heading">
-									<a href="/organizer/deleteevent/<%= event.id%>" data-method="delete" class="btn btn-sm btn-danger pull-right">x</a>
-										<h4><%= event.name  %> <br> <small><%= event.venue  %></small></h4>
+						
+						<% end %>
+						<% columncounter = columncounter + 1 %>
+							<div class="col-lg-4">
+								
+									<div class="panel panel-default panel-border-grey ex1 text-center justify-block box-shadow ">
+										<div class="panel-heading">
+										<a href="/organizer/deleteevent/<%= event.id%>" data-method="delete" class="btn btn-sm btn-danger pull-right">x</a>
+											<h4><%= event.name  %> <br> <small><%= event.venue  %></small></h4>
+
+										</div>
+										<a href="/organizers/showevent/<%= event.id %>" style='color:black;'>
+											<div class="panel-body">
+												
+												Start time: <%= pretty_date(event.start_date)  %> <br>
+												End time: <%= pretty_date(event.end_date)  %> <br>
+												<%= event.city  %>, <%= event.state  %> <br>
+												<%= event.address %>
+												<%= event.zipcode  %>
+												
+												
+											</div>
+										</a>
 
 									</div>
-									<a href="/organizers/showevent/<%= event.id %>" style='color:black;'>
-									<div class="panel-body">
-										
-										Start time: <%= pretty_date(event.start_date)  %> <br>
-										End time: <%= pretty_date(event.end_date)  %> <br>
-										<%= event.city  %>, <%= event.state  %> <br>
-										<%= event.address %>
-										<%= event.zipcode  %>
-										
-										
-									</div>
-
+								
+							</div>
+							<% if columncounter == 3 %>
+								
 								</div>
-							</a>
-						</div>
-					<% end %>
-					<% end %>
+							<%  columncounter = 0 %>
+							<% end %>
+						<% end %>
+						<% end %>
+						
+					</div>
 					
 			
 			</div>
