@@ -1,6 +1,6 @@
 class OrganizersController < ApplicationController
 	before_action(:authenticate_user!)
-	before_action :ensure_organizer, except: [:show, :event_show]
+	before_action :ensure_organizer
 	def index
 		@vendors = User.where(:role => 'vendor')
 		@events = current_user.events
@@ -15,7 +15,20 @@ class OrganizersController < ApplicationController
 	def new
 		
 		render 'new'
+
 	end
+	def event_delete
+		event = Event.find_by(:id => params[:id])
+		if event.user_id == current_user.id
+			event.destroy
+		else
+			redirect_to :back
+		end
+		
+		redirect_to organizer_path
+		
+	end
+
 	def create
 		event = current_user.events.new()
 		event.name = params[:event]["name"]
@@ -31,7 +44,7 @@ class OrganizersController < ApplicationController
 
 		if event.save
 			
-			redirect_to organizers_path
+			redirect_to organizer_path
 		else
 			redirect_to organizers_addevent_path
 		end
@@ -47,6 +60,10 @@ class OrganizersController < ApplicationController
 		end
 		
 	end
+	def examine_vendor
+		@vendor = User.find_by(:id => params[:id])
+		render 'examinevendor'
+	end
 
 	private
 
@@ -60,10 +77,12 @@ class OrganizersController < ApplicationController
 		params.require(:event).permit(:name, :start_date, :venue, :address, :zipcode, :city, :state, :start_time, :end_time, :end_time)
 	end
 	def datetime_builder(date,time)
-		
-		parse_date = Date.parse(date)
-		parse_time = Time.parse(time)
-		
-		return DateTime.new(parse_date.year, parse_date.month, parse_date.day, parse_time.hour, parse_time.min)
+		if date.present? && time.present?
+			parse_date = Date.parse(date)
+			parse_time = Time.parse(time)
+			return DateTime.new(parse_date.year, parse_date.month, parse_date.day, parse_time.hour, parse_time.min)
+		else 
+			return DateTime.now
+		end
 	end
 end

@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
     has_many :events
     has_many :services, :through => :associated_services
 	has_many :associated_services
+	has_many :comments
 end
 
  

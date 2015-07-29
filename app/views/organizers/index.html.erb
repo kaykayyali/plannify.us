@@ -4,15 +4,22 @@
 	<br>
 		<div class="panel panel-default  panel-border-black">
 			<div class="panel-heading">
-				Vendors in your area
+				<h3>Vendors in your area</h3>
 			</div>
 
 			<div class="panel-body light-blue">
 				<ul class="list-unstyled">
 					<% @vendors.each do |vendor| %>
 						<li>
-							<h5 style="display:inline;"> <a href="<%= vendors_path  %>" target="_blank" ><%= vendor.first_name  %></a></h5>
+							<h4 style="display:inline;"> 
+								<a href="/organizers/examinevendor/<%= vendor.id  %>" ><%= vendor.first_name  %> <%= vendor.last_name  %>
+								</a>
+								<% if vendor.name.present? %>
+									<%= vendor.name  %>
+								<% end %>
+							</h4>
 						</li>
+						<hr>
 					<% end %>
 				</ul>
 
@@ -34,22 +41,27 @@
 					<% if @events.present? %>
 					<% @events.each do |event| %>
 						<div class="col-lg-4">
-							<a href="/organizers/showevent/<%= event.id %>" style='color:black;'><div class="panel panel-default panel-border-grey ex1 text-center">
-								<div class="panel-heading">
-									<h4><%= event.name  %> <br> <small><%= event.venue  %></small></h4>
-								</div>
-								<div class="panel-body">
-									
-									Start time: <%= pretty_date(event.start_date)  %> <br>
-									End time: <%= pretty_date(event.end_date)  %> <br>
-									<%= event.city  %>, <%= event.state  %> <br>
-									<%= event.address %>
-									<%= event.zipcode  %>
-									
-									
-								</div>
+							
+								<div class="panel panel-default panel-border-grey ex1 text-center justify-block box-shadow ">
+									<div class="panel-heading">
+									<a href="/organizer/deleteevent/<%= event.id%>" data-method="delete" class="btn btn-sm btn-danger pull-right">x</a>
+										<h4><%= event.name  %> <br> <small><%= event.venue  %></small></h4>
 
-							</div></a>
+									</div>
+									<a href="/organizers/showevent/<%= event.id %>" style='color:black;'>
+									<div class="panel-body">
+										
+										Start time: <%= pretty_date(event.start_date)  %> <br>
+										End time: <%= pretty_date(event.end_date)  %> <br>
+										<%= event.city  %>, <%= event.state  %> <br>
+										<%= event.address %>
+										<%= event.zipcode  %>
+										
+										
+									</div>
+
+								</div>
+							</a>
 						</div>
 					<% end %>
 					<% end %>

@@ -12,7 +12,7 @@
 				<ul class="list-unstyled">
 					<% @organizers.each do |organizer|  %>
 						<li>
-							<h4 style="display: inline"><a href="<%= '/vendors/examineorganizer' + organizer.id.to_s  %>" ><%= organizer.first_name  %></a></h4>
+							<h4 style="display: inline"><a href="<%= '/vendors/examineorganizer/' + organizer.id.to_s  %>" ><%= organizer.first_name  %> <%= organizer.last_name  %></a></h4>
 						</li>
 		
 					<%  end %>
@@ -36,23 +36,26 @@
 					<% if @events.present? %>
 						<% @events.each do |event| %>
 							<div class="col-lg-4">
-								<a href="/vendors/examineevent/<%= event.id %>" style='color:black;'><div class="panel panel-default panel-border-grey ex1 text-center">
-									<div class="panel-heading">
-										<h4><%= event.name  %> <br> <small><%= event.venue  %></small></h4>
+								<a href="/vendors/examineevent/<%= event.id %>" style='color:black;'>
+									<div class="panel panel-default panel-border-grey ex1 text-center">
+										<div class="panel-heading">
+											<h4><%= event.name  %> <br> <small><%= event.venue  %></small></h4>
+											
+
+										</div>
+										<div class="panel-body">
+											Posted by: <%= User.find_by(:id => event.user_id).first_name  %> <%= User.find_by(:id => event.user_id).last_name  %><br>
+											Start time: <%= pretty_date(event.start_date)  %> <br>
+											End time: <%= pretty_date(event.end_date)  %> <br>
+											<%= event.city  %>, <%= event.state  %> <br>
+											<%= event.address %>
+											<%= event.zipcode  %>
+											
+											
+										</div>
 
 									</div>
-									<div class="panel-body">
-										Posted by: <%= User.find_by(:id => event.user_id).first_name  %> <%= User.find_by(:id => event.user_id).last_name  %><br>
-										Start time: <%= pretty_date(event.start_date)  %> <br>
-										End time: <%= pretty_date(event.end_date)  %> <br>
-										<%= event.city  %>, <%= event.state  %> <br>
-										<%= event.address %>
-										<%= event.zipcode  %>
-										
-										
-									</div>
-
-								</div></a>
+								</a>
 							</div>
 						<% end %>
 					<% end %>

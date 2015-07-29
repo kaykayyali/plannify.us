@@ -11,11 +11,12 @@ class VendorsController < ApplicationController
 	end
 	def examine_event
 		@event = Event.find_by(:id => params[:id])
+		@organizer = User.find_by(:id => @event.user_id)
 		render 'examineevent'
 		
 	end
 	def examine_organizer
-		@event = Event.find_by(:id => params[:id])
+		@organizer = User.find_by(:id => params[:id])
 		render 'examineorganizer'
 		
 	end

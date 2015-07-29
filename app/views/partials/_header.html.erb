@@ -26,6 +26,7 @@
 					<!-- Temp Sign out -->
 					
 					<li class="navbar-text pull-right"><a href="<%=destroy_user_session_path%>" data-method="delete">Sign-Out</a></li>
+					<li class="navbar-text pull-right"><a href="/user/profile/<%= current_user.id %>" data-method="delete">Profile</a></li>
 				<% end %>
 			</ul>
 		</nav>

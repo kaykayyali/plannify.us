@@ -10,10 +10,13 @@ Rails.application.routes.draw do
 
 
     get '/organizer' => 'organizers#index'
-      get '/organizers/:id' => 'organizers#show'
+      
       get '/organizers/addevent' => 'organizers#new'
       post '/organizers/addevent' => 'organizers#create'
       get '/organizers/showevent/:id' => 'organizers#event_show'
+      delete 'organizer/deleteevent/:id' => 'organizers#event_delete'
+      get '/organizers/examinevendor/:id' => 'organizers#examine_vendor'
+      get '/organizers/:id' => 'organizers#show'
 
     get '/staff' => 'staff#index'
   # The priority is based upon order of creation: first created -> highest priority.
