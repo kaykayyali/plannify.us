@@ -1,10 +1,14 @@
 class OrganizersController < ApplicationController
 	before_action(:authenticate_user!)
-	before_action(:ensure_organizer)
-
-	def show
+	before_action :ensure_organizer, except: [:show, :event_show]
+	def index
 		@vendors = User.where(:role => 'vendor')
 		@events = current_user.events
+		render 'index'
+	end
+
+	def show
+		@organizer = User.find_by(:id => params[:id])
 		render 'show'
 	end
 

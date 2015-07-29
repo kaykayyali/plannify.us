@@ -1,18 +1,17 @@
 
 <div class="container-fluid wow fadeInLeft animated">
 
-	<div class="col-lg-3">
+	
+	<div class="col-lg-12">
 	<br>
-		<div class="panel panel-default  panel-border-black">
+	<div class="panel panel-default  panel-border-black">
 			<div class="panel-heading">
-				Events this organizer is also handling.
+				<h4>Details for <%= @event.name %></h4>
 			</div>
 
 			<div class="panel-body light-blue">
 				<ul class="list-unstyled">
-					<% @organizer.events.each do |event| %>
-						<h4> <a href="<%= '/vendors/examineevent/' + event.id.to_s  %>" ><%= event.name  %></h4>
-					<% end %>
+					
 					<li><button onclick="goBack()" class="btn btn-primary">Go Back</button></li>
 
 
@@ -21,10 +20,6 @@
 			</div>
 			
 		</div>
-	</div>
-	
-	<div class="col-lg-9">
-	<br>
 	
 	</div>
 	

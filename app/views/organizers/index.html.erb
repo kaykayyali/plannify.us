@@ -1,2 +1,65 @@
-<%= render './partials/header'  %>
-<h1>Organizers Page</h1>
+<div class="container-fluid wow fadeInLeft animated">
+
+	<div class="col-lg-3">
+	<br>
+		<div class="panel panel-default  panel-border-black">
+			<div class="panel-heading">
+				Vendors in your area
+			</div>
+
+			<div class="panel-body light-blue">
+				<ul class="list-unstyled">
+					<% @vendors.each do |vendor| %>
+						<li>
+							<h5 style="display:inline;"> <a href="<%= vendors_path  %>" target="_blank" ><%= vendor.first_name  %></a></h5>
+						</li>
+					<% end %>
+				</ul>
+
+			</div>
+			
+		</div>
+	</div>
+	
+	<div class="col-lg-9">
+	<br>
+		<div class="panel panel-default light-blue panel-border-black">
+			<div class="panel-heading clearfix">
+				<a href="<%= organizers_addevent_path  %>" style="color:white;"><button class="btn btn-primary btn-lg pull-right" >Add New Event</button></a>
+
+					<h2 class="pull-left">Events</h2> 
+					<br>
+				</div>
+				<div class="panel-body">
+					<% if @events.present? %>
+					<% @events.each do |event| %>
+						<div class="col-lg-4">
+							<a href="/organizers/showevent/<%= event.id %>" style='color:black;'><div class="panel panel-default panel-border-grey ex1 text-center">
+								<div class="panel-heading">
+									<h4><%= event.name  %> <br> <small><%= event.venue  %></small></h4>
+								</div>
+								<div class="panel-body">
+									
+									Start time: <%= pretty_date(event.start_date)  %> <br>
+									End time: <%= pretty_date(event.end_date)  %> <br>
+									<%= event.city  %>, <%= event.state  %> <br>
+									<%= event.address %>
+									<%= event.zipcode  %>
+									
+									
+								</div>
+
+							</div></a>
+						</div>
+					<% end %>
+					<% end %>
+					
+			
+			</div>
+
+		</div>
+	</div>
+	
+
+	
+</div>

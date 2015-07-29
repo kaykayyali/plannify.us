@@ -8,9 +8,9 @@ class SiteController < ApplicationController
 	def check_for_user
 		if current_user.present?
 			if current_user.role == "vendor"
-				redirect_to "/vendors"
+				redirect_to "/vendor"
 			elsif current_user.role == "organizer"
-				redirect_to "/organizers"
+				redirect_to "/organizer"
 			elsif current_user.role == "staff"
 				redirect_to "/staff"
 			end		

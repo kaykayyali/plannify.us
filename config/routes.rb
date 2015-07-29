@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'site#index'
-    get '/vendors' => 'vendors#show'
-        
+    get '/vendor' => 'vendors#index'
+        get '/vendors' => 'vendors#show'
+        get '/vendors/examineevent/:id' => 'vendors#examine_event'
+        get '/vendors/examineorganizer/:id' => 'vendors#examine_organizer'
         
         
 
 
-    get '/organizers' => 'organizers#show'
+    get '/organizer' => 'organizers#index'
+      get '/organizers/:id' => 'organizers#show'
       get '/organizers/addevent' => 'organizers#new'
       post '/organizers/addevent' => 'organizers#create'
       get '/organizers/showevent/:id' => 'organizers#event_show'
