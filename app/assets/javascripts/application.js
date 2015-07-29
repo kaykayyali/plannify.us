@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require wow
+//= require marked
 //= require jquery.easing
 //= require twitter/bootstrap
 //= require turbolinks

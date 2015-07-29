@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'site#index'
+#vendor
     get '/vendor' => 'vendors#index'
         get '/vendors' => 'vendors#show'
         get '/vendors/examineevent/:id' => 'vendors#examine_event'
@@ -8,7 +9,7 @@ Rails.application.routes.draw do
         
         
 
-
+#organizers
     get '/organizer' => 'organizers#index'
       
       get '/organizers/addevent' => 'organizers#new'
@@ -17,8 +18,13 @@ Rails.application.routes.draw do
       delete 'organizer/deleteevent/:id' => 'organizers#event_delete'
       get '/organizers/examinevendor/:id' => 'organizers#examine_vendor'
       get '/organizers/:id' => 'organizers#show'
-
+#staf
     get '/staff' => 'staff#index'
+#api
+  get '/api/events/:id/comments' => 'api#get_comments'
+  post '/api/events/:id/comments' => 'api#add_comments'
+#profiles
+  get '/profiles/:id' => 'profiles#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

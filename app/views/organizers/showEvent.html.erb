@@ -27,11 +27,16 @@
 					<a href="<%= organizer_path  %>"><button class="btn btn-primary">Back to events</button></a>
 					
 				</div>
-				<div class="col-md-6 commentList" id='commentList'>
-					
+					<div class="col-md-6 commentList">
 						
-					
-				</div>
+							<h4>Comments</h4>
+							<hr>
+						
+						<div class="react_comments">
+							<%= react_component('CommentBox', props = {:url => "/api/events/#{@event.id}/comments", :pollInterval => 3000}) %>
+						</div>
+						
+					</div>
 			</div>
 				
 					

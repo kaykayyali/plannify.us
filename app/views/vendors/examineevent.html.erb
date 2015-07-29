@@ -29,9 +29,14 @@
 					<a class="btn btn-primary" href="<%= vendor_path  %>">Home</a>
 				</div>
 				<div class="col-md-6 commentList" id='commentList'>
-					
+						<h4>Comments</h4>
+							<hr>
 						
-					
+						<div class="react_comments">
+							<%= react_component('CommentBox', props = {:url => "/api/events/#{@event.id}/comments", :pollInterval => 3000}) %>
+						</div>
+						
+					</div>
 				</div>
 			</div>
 				
