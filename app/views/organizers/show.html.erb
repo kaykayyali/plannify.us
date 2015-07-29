@@ -5,11 +5,18 @@
 	<br>
 		<div class="panel panel-default  panel-border-black">
 			<div class="panel-heading">
-				
+				Vendors in your area
 			</div>
 
 			<div class="panel-body light-blue">
-				
+				<ul>
+					<% @vendors.each do |vendor| %>
+						<li>
+							<%= vendor.first_name  %>
+						</li>
+					<% end %>
+				</ul>
+
 			</div>
 			
 		</div>

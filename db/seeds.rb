@@ -1,9 +1,0 @@
-User.create!([
-  {role: "vendor", email: "john@doe.com", encrypted_password: "$2a$10$uAqbGdjq9Fsvju1LMG8TGewLpB0z4TxTckwuDmttaiL9oihYFYjUq", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2015-07-28 21:10:43", last_sign_in_at: "2015-07-28 21:10:43", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", first_name: "Kaysser", last_name: "Kayyali", name: "Kaysser Kayyali", owner: nil, city: "Miami", state: "Fl", rating: nil},
-  {role: "organizer", email: "kaykayyali@gmail.com", encrypted_password: "$2a$10$yOCXKSGRNPAyDBa9b7XtUevkVcxg/tp.SvRszFJWQH7K7UFFJ8aDC", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 3, current_sign_in_at: "2015-07-28 21:26:25", last_sign_in_at: "2015-07-28 20:54:45", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", first_name: "Emad", last_name: "Kayyali", name: "MAC Parking", owner: "Emad Kayyali", city: "Miami", state: "Florida", rating: 5},
-  {role: "staff", email: "gvale014@fiu.edu", encrypted_password: "$2a$10$HuYc9CE2q0KpVHEHqvDmyO03XYnF8LUiVM0K8k8E7SaGD4r0HccmK", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2015-07-28 21:38:16", last_sign_in_at: "2015-07-28 21:38:16", current_sign_in_ip: "::1", last_sign_in_ip: "::1", first_name: "Gloria", last_name: "Valencia", name: "Gloria Kayyali", owner: nil, city: nil, state: nil, rating: nil}
-])
-Event.create!([
-  {date: nil, zipcode: "33162", venue: "My house", state: "FL", city: "N Miami Beach", address: "1795 NE 175th st", user_id: 1, name: "Kaysser's Bday Bash", start_date: "2015-11-13 20:00:00", end_date: "2015-11-14 02:00:00"},
-  {date: nil, zipcode: "33162", venue: "HOME", state: "FL", city: "N Miami Beach", address: "1795 NE 175th st", user_id: 1, name: "Kaysser's Bday Bash", start_date: "2015-11-13 20:00:00", end_date: "2015-12-13 14:00:00"}
-])

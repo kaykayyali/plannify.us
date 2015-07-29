@@ -3,6 +3,7 @@ class OrganizersController < ApplicationController
 	before_action(:ensure_organizer)
 
 	def show
+		@vendors = User.where(:role => 'vendor')
 		@events = current_user.events
 		render 'show'
 	end
