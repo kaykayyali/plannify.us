@@ -5,11 +5,13 @@
      <h2>Sign up</h2>
       <div class="wow fadeInLeft animated" >
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  
         <% if devise_error_messages!.present? %>
         <div class="alert alert-info" role="alert" style="list-style-type: none;">
         <%= devise_error_messages! %>
-        <% end %>
         </div>
+        <% end %>
+        
 
         <div class="form-group">
           <%= f.label :first_name %><br />
@@ -40,6 +42,7 @@
         </div>
         
         <div class="form-group">
+        <%= f.label :selet_your_role  %>
        <%= select_tag("user[role]", options_for_select(
                       [
                         ['Event Organizer', "organizer"],

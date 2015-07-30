@@ -36,8 +36,8 @@
 					</button>
 					<br>
 					<hr>
-					<button onclick="goBack()" class="btn btn-primary">Go Back</button> 
-					<a href="<%= organizer_path  %>"><button class="btn btn-primary">Back to events</button></a>
+				
+					<a href="<%= organizer_path  %>" class="btn btn-primary">Back to events</a>
 					
 				</div>
 					<div class="col-md-6 " id="commentList">
@@ -134,18 +134,14 @@
   </div>
 </div>
 
-<script>
-function goBack() {
-    window.history.back();
-}
-</script>
+
 	
-	<div class="modal fade" id="viewservicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="viewVendorModal" tabindex="-1" role="dialog" aria-labelledby="viewVendorModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"></h4>
+        <h4 class="modal-title" id="viewVendorModalLabel"></h4>
       </div>
       <div class="modal-body">
       	

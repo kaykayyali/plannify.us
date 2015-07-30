@@ -1,9 +1,6 @@
 var CommentList = React.createClass({
   render: function() {
     var commentNodes = this.props.data.map(function(comment, index) {
-      console.log(comment.user)
-      console.log(comment.content)
-
       return (
         // `key` is a React-specific concept and is not mandatory for the
         // purpose of this tutorial. if you're curious, see more here:

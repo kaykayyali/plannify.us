@@ -7,7 +7,7 @@ class ApiController < ApplicationController
     	event.comments.each do |comment|
     		textalign = "text-align:right;"
     		color = "color:#c7254e;"
-    		p "Made it"
+    	
     		if User.find_by(:id =>comment.user_id).role == "organizer"
     			textalign = "text-align:left;"
     			color = "color:#0E8FAB;"

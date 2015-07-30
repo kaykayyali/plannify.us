@@ -14,20 +14,14 @@
 //= require jquery_ujs
 //= require wow
 //= require marked
-//= require jquery.easing
+// require jquery.easing
 //= require twitter/bootstrap
-//= require turbolinks
-//= require twitter/bootstrap/tooltip
-//= require twitter/bootstrap/popover
+
+// require twitter/bootstrap/tooltip
+// require twitter/bootstrap/popover
 //= require react
 //= require react_ujs
 //= require components
 //= require_tree .
 
 
-$(function () {
-	$('a[data-remote]').on("ajax:success", function(event, data, status, xhr) {
-		
-		$("#" + data.response).remove()
-	})
-})
