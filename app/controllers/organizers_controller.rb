@@ -25,8 +25,8 @@ class OrganizersController < ApplicationController
 			redirect_to :back
 		end
 		
-		redirect_to organizer_path
-		
+		# redirect_to organizer_path
+		render json: {response: event.id},  status: 200 
 	end
 
 	def create

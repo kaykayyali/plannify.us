@@ -33,7 +33,7 @@ gem "respond-rails", "~> 1.0"
 gem 'bcrypt', '~> 3.1.7'
 gem 'seed_dump'
 
-
+gem 'puma'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   post '/api/events/:id/comments' => 'api#add_comments'
 #profiles
   get '/profiles/:id' => 'profiles#show'
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

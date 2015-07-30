@@ -52,9 +52,12 @@
 						<% columncounter = columncounter + 1 %>
 							<div class="col-lg-4">
 								
-									<div class="panel panel-default panel-border-grey ex1 text-center justify-block box-shadow ">
+									<div class="panel panel-default panel-border-grey ex1 text-center justify-block box-shadow  " id="<%= event.id  %>">
 										<div class="panel-heading">
-										<a href="/organizer/deleteevent/<%= event.id%>" data-method="delete" class="btn btn-sm btn-danger pull-right">x</a>
+
+
+										<%= link_to 'x', "/organizer/deleteevent/#{event.id}", data: {method: :delete}, remote: true , :class => "btn btn-sm btn-danger pull-right"   %>
+										
 											<h4><%= event.name  %> <br> <small><%= event.venue  %></small></h4>
 
 										</div>
