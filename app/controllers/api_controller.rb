@@ -1,4 +1,5 @@
 class ApiController < ApplicationController
+	before_action(:authenticate_user!)
 	def get_comments
 
 		event = Event.find_by(:id => params[:id])
@@ -47,6 +48,17 @@ class ApiController < ApplicationController
     render :status => 200, :json => {:response => "Success"}
 		
 	end
+
+	def vendor_info
+		vendor = User.find_by(id: params[:id])
+		render json: {
+			title: vendor.name,
+			owner: vendor.owner,
+			services: vendor.services,
+			email: vendor.email
+		}
+	end
+
 	private 
 	  def format_date(date)
     return date.strftime('%B, %e %Y at %l:%M %P')

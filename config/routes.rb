@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 #api
   get '/api/events/:id/comments' => 'api#get_comments'
   post '/api/events/:id/comments' => 'api#add_comments'
+  get '/api/vendors/vendorinfo/:id' => 'api#vendor_info'
 #profiles
   get '/profiles/:id' => 'profiles#show'
 

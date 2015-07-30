@@ -28,15 +28,15 @@
 						<h4>Zipcode: <%= @event.zipcode  %></h4>
 					</p>
 					<br>
-					<button onclick="showServicesModal()" data-toggle="modal" data-target="#addserviceModal" class="btn btn-default">
+					<button  data-toggle="modal" data-target="#addserviceModal" class="btn btn-default">
 						Add a service
 					</button>
-					<button onclick="showServicesModal()" data-toggle="modal" data-target="#viewservicesModal" class="btn btn-default">
+					<button  data-toggle="modal" data-target="#viewservicesModal" class="btn btn-default">
 						View services
 					</button>
 					<br>
 					<hr>
-				
+
 					<a href="<%= organizer_path  %>" class="btn btn-primary">Back to events</a>
 					
 				</div>
@@ -88,9 +88,10 @@
 	      					<ul class="list-unstyled">
 								<% if vendor.services.any? { |item| item[:name] == serv.name } %>
 									<li> 
-										<button class="btn btn-primary btn-sm"> 
+										<button class="btn btn-primary btn-sm vendorShow" id = "<%= vendor.id  %>"> 
 										
 											<%= vendor.name  %>
+											
 										</button> 
 									</li>
 								<% end %>
@@ -110,8 +111,8 @@
 </div>
 
 <div class="modal fade" id="viewservicesModal" tabindex="-1" role="dialog" aria-labelledby="viewServicesModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content ">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="viewServicesModalLabel">Services scheduled</h4>
@@ -128,7 +129,8 @@
       		<% end %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a href="#" data-toggle="tooltip" title="Some tooltip text!"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></a>
+
       </div>
     </div>
   </div>
@@ -137,16 +139,35 @@
 
 	
 	<div class="modal fade" id="viewVendorModal" tabindex="-1" role="dialog" aria-labelledby="viewVendorModalLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="viewVendorModalLabel"></h4>
+        <h4 class="modal-title" id="vendorModalLabel"></h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body center-block">
+      	<h5>
+      		
+      			Owner: <span id="vendorOwnerLabel"></span>
+      		
+      	</h5>
+      	<h5>
+      		
+      			Email: <span id="vendorEmailLabel"></span>
+      		
+      	</h5>
+      	<h5>
+      			Services:
+      			<ul style="list-style-type: none;margin-left:15px;" id="vendorServicesList"></ul>
+      	</h5>
+
+
+
       	
       </div>
       <div class="modal-footer">
+      	<a class="addProviderButton btn btn-primary">Add this provider</a>
+
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -154,3 +175,6 @@
 </div>
 
 	
+
+
+
