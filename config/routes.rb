@@ -30,6 +30,10 @@ Rails.application.routes.draw do
 #profiles
   get '/profiles/:id' => 'profiles#show'
 
+#messages
+  post '/api/message/send_confirmation' => 'api#send_confirmation'
+  get '/api/message/:id/messages' => 'api#serve_messages'
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

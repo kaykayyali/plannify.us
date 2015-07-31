@@ -3,22 +3,25 @@
 
 	<div class="col-lg-3">
 	<br>
-		<div class="panel panel-default  panel-border-black">
+		<div class="panel panel-default  panel-border-black ">
 			<div class="panel-heading">
 				Organizers in your area
 			</div>
 
-			<div class="panel-body light-blue">
+			<div class="panel-body light-blue organizerList">
 				<ul class="list-unstyled">
 					<% @organizers.each do |organizer|  %>
 						<li>
-							<h4 style="display: inline"><a href="<%= '/vendors/examineorganizer/' + organizer.id.to_s  %>" ><%= organizer.first_name  %> <%= organizer.last_name  %></a></h4>
+							<h4 style="display: inline"><a href="<%= '/vendors/examineorganizer/' + organizer.id.to_s  %>" ><b><%= organizer.first_name  %> <%= organizer.last_name  %></b></a></h4>
 						</li>
+						<hr>
 		
 					<%  end %>
 				</ul>
-	
 			</div>
+		</div>
+		<div class="messageBoxComponent light-blue">
+		<%= react_component('MessageBox', props = {:url => "/api/message/#{current_user.id}/messages", :pollInterval => 3000}) %>
 			
 		</div>
 	</div>
@@ -39,9 +42,17 @@
 								<a href="/vendors/examineevent/<%= event.id %>" style='color:black;'>
 									<div class="panel panel-default panel-border-grey ex1 text-center">
 										<div class="panel-heading">
-											<h4><%= event.name  %> <br> <small><%= event.venue  %></small></h4>
+											<% servicing = false %>
+											<% event.confirmed_services.each do |serv| %>
+												<% association = AssociatedService.find_by(:id => serv.associated_service_id) %>
+												<% if association.service_id = current_user.id %>
+													<% servicing = true %>
+												<% end %>
+											<% end %>
 											
-
+											<h4><%= event.name  %> <br> <small><%= event.venue  %></small> <% if servicing == true%>
+											<span class="label label-success">Servicing</span>
+											<% end %></h4>
 										</div>
 										<div class="panel-body">
 											Posted by: <%= User.find_by(:id => event.user_id).first_name  %> <%= User.find_by(:id => event.user_id).last_name  %><br>

@@ -1,3 +1,16 @@
 // Place all the styles related to the vendors controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.organizerList {
+	overflow: auto;
+	max-height: 35vh;
+	min-height: 9vh;
+}
+.messageBoxComponent {
+	overflow: auto;
+	border: 2px solid;
+	padding: 5px;
+	max-height: 42vh;
+	min-height: 35vh;
+	border-radius: 5px;
+}

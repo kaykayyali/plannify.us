@@ -65,7 +65,8 @@ class ApiController < ApplicationController
 			render json: {
 				confirmed_service: confirmed.id,
 				vendor_name: vendor.name,
-				service_name: serv.name
+				service_name: serv.name,
+				event: event.id
 			}
 		else
 			render status: 404 , json: {response: "Failed"}
@@ -90,6 +91,73 @@ class ApiController < ApplicationController
 			services: vendor.services,
 			email: vendor.email
 		}
+	end
+
+	def send_cancellation
+		if current_user.present?
+
+			message = Message.new
+			messageContent = User.find_by(:id => current_user.id).first_name + " has confirmed you as a provider for " + Event.find_by(:id => params[:event_id]).name + "."
+			message.content = messageContent
+			message.from_id = current_user.id
+			message.to_id = User.find_by(:name => params[:vendor_name]).id
+			p params[:vendor_name]
+			message.save
+			render json: {response: "Sent to " + message.to_id}, status: 200
+		end
+		
+	end
+
+
+	def send_confirmation
+		if current_user.present?
+
+			message = Message.new
+			messageContent = User.find_by(:id => current_user.id).first_name + " has confirmed you as a provider for " + Event.find_by(:id => params[:event_id]).name + "."
+			message.content = messageContent
+			message.from_id = current_user.id
+			message.to_id = User.find_by(:name => params[:vendor_name]).id
+			p params[:vendor_name]
+			message.save
+			render json: {response: "Sent to " + message.to_id}, status: 200
+		end
+		
+	end
+	def serve_messages
+		messages = Message.all.where(:to_id => params[:id]).order(:id => :DESC)
+		messagesArray = []
+		messages.each do |message|
+
+			textalign = "text-align:right;"
+    		color = "color:#c7254e;"
+    	
+    		if User.find_by(:id =>message.from_id).role == "organizer"
+    			textalign = "text-align:left;"
+    			color = "color:#0E8FAB;"
+    		end
+
+    		styles = "style='"+ textalign + color + "'"
+
+	      messageFirstname = "<a href= '/profiles/#{message.from_id}'"+styles + ">" + User.find_by(:id => message.from_id).first_name
+	      messageLastname = User.find_by(:id => message.from_id).last_name + "</a>"
+	      messageUsername = messageFirstname + " " + messageLastname
+			
+			newMessage = {
+	          :user => messageUsername,
+	          :content => message.content,
+	          :date => format_date(message.created_at)
+	      }
+	      messagesArray.push(newMessage)
+
+		end
+		if messages.present?
+
+			render :status => 200 , :json => messagesArray
+		else
+			render :status => 404, :json => {:response => "Failed to retrive comments"}
+		end
+		
+		
 	end
 
 	private 

@@ -12,7 +12,7 @@
 					<% @vendors.each do |vendor| %>
 						<li>
 							<h4 style="display:inline;"> 
-								<a href="/organizers/examinevendor/<%= vendor.id  %>" ><%= vendor.first_name  %> <%= vendor.last_name  %>
+								<a href="/organizers/examinevendor/<%= vendor.id  %>" ><b><%= vendor.first_name  %> <%= vendor.last_name  %></b>
 								</a>
 								<% if vendor.name.present? %>
 									<%= vendor.name  %>
@@ -24,6 +24,10 @@
 				</ul>
 
 			</div>
+			
+		</div>
+		<div class="react-component">
+		<%= react_component('MessageBox', props = {:url => "/api/message/#{current_user.id}/messages", :pollInterval => 3000}) %>
 			
 		</div>
 	</div>
