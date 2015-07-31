@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
     has_many :services, :through => :associated_services
 	has_many :associated_services
 	has_many :comments
+	has_many :messages_from, :foreign_key => :from_id, class_name: 'Message'
+	has_many :messages_to, :foreign_key => :to_id, class_name: 'Message'
+
+
 end
 
  
