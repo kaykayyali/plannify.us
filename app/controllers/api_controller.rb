@@ -49,6 +49,27 @@ class ApiController < ApplicationController
 		
 	end
 
+	def add_service
+		event = Event.find_by(id: params[:eventid])
+		serv = Service.find_by(name: params[:service])
+		vendor = User.find_by(name: params[:name])
+
+		associatedServ = AssociatedService.where(:service_id => serv.id, :user_id => vendor.id )
+		p associatedServ
+
+
+		if associatedServ.present? && check_for_confirmed_service(event, associatedServ) == false
+			confirmed = ConfirmedService.create(:event_id => event.id, :associated_service_id => associatedServ[0].id)
+			event.confirmed_services.push(confirmed)
+			render json: {response: "Worked"}
+		else
+			render json: {response: "Failed"}
+		end
+		
+
+		
+	end
+
 	def vendor_info
 		vendor = User.find_by(id: params[:id])
 		render json: {
@@ -62,5 +83,22 @@ class ApiController < ApplicationController
 	private 
 	  def format_date(date)
     return date.strftime('%B, %e %Y at %l:%M %P')
-  end
+  	end
+  	def check_for_confirmed_service(event, assoc)
+  		associated = false
+
+  		event.confirmed_services.each do |serv|
+  			if serv.associated_service_id == assoc[0].id
+  				associated = true
+  			end
+  		end
+  		if associated == true
+  			p associated
+  			return true
+  		else
+  			p associated
+  			return false
+  		end
+  			
+  	end
 end

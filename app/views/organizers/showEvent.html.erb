@@ -88,7 +88,7 @@
 	      					<ul class="list-unstyled">
 								<% if vendor.services.any? { |item| item[:name] == serv.name } %>
 									<li> 
-										<button class="btn btn-primary btn-sm vendorShow" id = "<%= vendor.id  %>"> 
+										<button class="btn btn-primary btn-sm vendorShow" data-hook="<%= serv.name  %>"id = "<%= vendor.id  %>"> 
 										
 											<%= vendor.name  %>
 											
@@ -118,12 +118,14 @@
         <h4 class="modal-title" id="viewServicesModalLabel">Services scheduled</h4>
       </div>
       <div class="modal-body">
-      		<% @event.services.each do |serv| %>
+      		<% @event.confirmed_services.each do |serv| %>
       			<li>
       				<p>
-	      				<button class="btn btn-primary">
-	      					<%= serv.name  %>
-	      				</button>
+	      				
+	      					<% association = AssociatedService.find_by(:id => serv.associated_service_id) %>
+	      					<%= Service.find_by(:id => association.service_id).name  %>
+	      					<%= User.find_by(:id => association.user_id).name  %>
+	      			
 	      			</p>
       			</li>
       		<% end %>
@@ -157,7 +159,7 @@
       		
       	</h5>
       	<h5>
-      			Services:
+      			Service Selected:
       			<ul style="list-style-type: none;margin-left:15px;" id="vendorServicesList"></ul>
       	</h5>
 
@@ -166,14 +168,14 @@
       	
       </div>
       <div class="modal-footer">
-      	<a class="addProviderButton btn btn-primary">Add this provider</a>
+      	<button class="addProviderButton btn btn-primary" id="" data-hook="addProvider">Add this provider</button>
 
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
-
+<span data-hook="eventIDholder" id= "<%= @event.id %>" ></span>
 	
 
 
