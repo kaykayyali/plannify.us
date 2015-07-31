@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get '/api/events/:id/comments' => 'api#get_comments'
   post '/api/events/:id/comments' => 'api#add_comments'
   get '/api/vendors/vendorinfo/:id' => 'api#vendor_info'
+  delete '/api/event/:id/deleteconfirmedservice/:service_id' => 'api#delete_confirmed_service'
 
   post '/api/events/addservice' => 'api#add_service'
 #profiles

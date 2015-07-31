@@ -61,12 +61,24 @@ class ApiController < ApplicationController
 		if associatedServ.present? && check_for_confirmed_service(event, associatedServ) == false
 			confirmed = ConfirmedService.create(:event_id => event.id, :associated_service_id => associatedServ[0].id)
 			event.confirmed_services.push(confirmed)
-			render json: {response: "Worked"}
+			confirmed.id
+			render json: {
+				confirmed_service: confirmed.id,
+				vendor_name: vendor.name,
+				service_name: serv.name
+			}
 		else
-			render json: {response: "Failed"}
+			render status: 404 , json: {response: "Failed"}
 		end
 		
 
+		
+	end
+	def delete_confirmed_service
+		event = Event.find_by(id: params[:id])
+		serv = ConfirmedService.find_by(id: params[:service_id])
+		serv.destroy
+		render json: {response: serv.id}
 		
 	end
 

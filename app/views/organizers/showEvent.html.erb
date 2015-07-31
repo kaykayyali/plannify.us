@@ -88,7 +88,7 @@
 	      					<ul class="list-unstyled">
 								<% if vendor.services.any? { |item| item[:name] == serv.name } %>
 									<li> 
-										<button class="btn btn-primary btn-sm vendorShow" data-hook="<%= serv.name  %>"id = "<%= vendor.id  %>"> 
+										<button class="btn btn-default btn-sm vendorShow" data-hook="<%= serv.name  %>"id = "<%= vendor.id  %>"> 
 										
 											<%= vendor.name  %>
 											
@@ -104,7 +104,7 @@
       	</ul>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -117,21 +117,24 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="viewServicesModalLabel">Services scheduled</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body confirmedServicesList">
       		<% @event.confirmed_services.each do |serv| %>
-      			<li>
+      			<li data-hook="service:<%= serv.id %>">
+      			<%= link_to 'X', "/api/event/#{@event.id}/deleteconfirmedservice/#{serv.id}", data: { :confirm => 'Are you sure?', method: :delete}, remote: true , :class => "btn btn-sm btn-danger pull-right"   %>
       				<p>
 	      				
 	      					<% association = AssociatedService.find_by(:id => serv.associated_service_id) %>
+	      					<span class="highlight"><%= User.find_by(:id => association.user_id).name  %></span>
 	      					<%= Service.find_by(:id => association.service_id).name  %>
-	      					<%= User.find_by(:id => association.user_id).name  %>
+	      					
 	      			
 	      			</p>
+
       			</li>
       		<% end %>
       </div>
       <div class="modal-footer">
-        <a href="#" data-toggle="tooltip" title="Some tooltip text!"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></a>
+        <a href="#" data-toggle="tooltip" title="Some tooltip text!"><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button></a>
 
       </div>
     </div>
@@ -168,9 +171,9 @@
       	
       </div>
       <div class="modal-footer">
-      	<button class="addProviderButton btn btn-primary" id="" data-hook="addProvider">Add this provider</button>
+      	<button class="addProviderButton btn btn-default" id="" data-hook="addProvider">Add this provider</button>
 
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

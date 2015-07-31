@@ -32,7 +32,7 @@
 	<br>
 		<div class="panel panel-default light-red panel-border-black">
 			<div class="panel-heading clearfix">
-				<a href="<%= organizers_addevent_path  %>" style="color:white;"><button class="btn btn-primary btn-lg pull-right" >Add New Event</button></a>
+				<a href="<%= organizers_addevent_path  %>" class= "btn btn-primary btn-lg pull-right"style="color:white;">Add New Event</a>
 
 					<h2 class="pull-left">Events</h2> 
 					<br>
@@ -56,7 +56,7 @@
 										<div class="panel-heading">
 
 
-										<%= link_to 'x', "/organizer/deleteevent/#{event.id}", data: { :confirm => 'Are you sure?', method: :delete}, remote: true , :class => "btn btn-sm btn-danger pull-right"   %>
+										<%= link_to 'X', "/organizer/deleteevent/#{event.id}", data: { :confirm => 'Are you sure?', method: :delete}, remote: true , :class => "btn btn-sm btn-danger pull-right"   %>
 										
 											<h4><%= event.name  %> <br> <small><%= event.venue  %></small></h4>
 

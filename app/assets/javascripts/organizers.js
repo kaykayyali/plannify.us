@@ -4,8 +4,11 @@
 	
 
 		$('a[data-remote]').on("ajax:success", function(event, data, status, xhr) {
+			
 				$("#" + String(data.response)).remove()
+				$("[data-hook~='service:"+ String(data.response)+"']").remove()
 		})
+		
 
 
 		$('.addProviderButton').on('click', function(event){
@@ -15,12 +18,17 @@
 				service: $(event.target).attr('data-hook'),
 				eventid: $('[data-hook~=eventIDholder').prop('id')
 			}
-			console.log(eventName)
-			var request = $.post('/api/events/addservice',eventName)
+			var confirmation = confirm("Are you sure you want to schedule " + event.target.id)
+			if (confirmation === true){
+				console.log(eventName)
+				var request = $.post('/api/events/addservice',eventName)
 
-			request.done(function(data){
-				console.log(data);
-			})
+				request.done(function(data){
+					console.log(data);
+					$("#viewVendorModal").modal('hide')
+					$('.confirmedServicesList').append("<li data-hook='service:"+data.confirmed_service+"'><p><span class='highlight'>"+data.vendor_name+"</span> " +data.service_name +"</p></li>");
+				})
+			}
 		})
 		
 											
