@@ -19,9 +19,8 @@
 				service: $(event.target).attr('data-hook'),
 				eventid: $('[data-hook~=eventIDholder').prop('id')
 			}
-			var confirmation = confirm("Are you sure you want to schedule " + event.target.id)
-			if (confirmation === true){
-				console.log(eventName)
+			
+				
 				var request = $.post('/api/events/addservice',eventName)
 
 				request.done(function(data){
@@ -41,7 +40,7 @@
 							$("[data-hook~='service:"+ String(data.response)+"']").remove()
 					})
 				})
-			}
+			
 		})
 		
 											
