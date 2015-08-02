@@ -54,6 +54,7 @@ class OrganizersController < ApplicationController
 		event = Event.find_by(:id => params[:id])
 		if event.user_id == current_user.id
 			@event = event
+			@vendors = User.where(:role => "vendor")
 			render 'showEvent'
 		else 
 			redirect_to '/'

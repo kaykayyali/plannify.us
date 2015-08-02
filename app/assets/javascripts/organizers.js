@@ -13,12 +13,14 @@
 
 
 		$('.addProviderButton').on('click', function(event){
-			console.log(event)
+			
 			var eventName = {
 				name: event.target.id,
 				service: $(event.target).attr('data-hook'),
 				eventid: $('[data-hook~=eventIDholder').prop('id')
 			}
+			
+			
 			
 				
 				var request = $.post('/api/events/addservice',eventName)
@@ -33,6 +35,11 @@
 						event_id: data.event,
 
 					}
+					console.log(data.event)
+					$("[id~='provider:" + data.vendor_id +"']").addClass("disabled")
+					$("[id~='provider:" + data.vendor_id +"']").addClass("btn-success")
+					$("[id~='provider:" + data.vendor_id +"']").removeClass("btn-default")
+
 					$.post('/api/message/send_confirmation', message, function(data){console.log(data.response)})
 					$('a[data-remote]').on("ajax:success", function(event, data, status, xhr) {
 			

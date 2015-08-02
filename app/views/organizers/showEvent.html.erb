@@ -77,19 +77,33 @@
       	<ul class="list-unstyled">
       		<% services = Service.all %>
       		<% services.each do |serv| %>
+			
       			<li>
       				<h5><%= serv.name  %></h5>
       				<ul class="list-inline">
       				
 	      				
 
-	      					<% vendors = User.where(:role => "vendor") %>
+	      					<% vendors = @vendors %>
 	      					
 	      					<% vendors.each do |vendor| %>
-	      					
+	      					<% @disable = "btn-default" %>
+	      						
 								<% if vendor.services.any? { |item| item[:name] == serv.name } %>
+									
+									<% @event.confirmed_services.each do |conserv| %>
+										<% association = AssociatedService.find_by(:id => conserv.associated_service_id) %>
+										
+										<% if association.user_id  == vendor.id %>
+											<% @disable = "btn-success disabled" %>	
+											<% break %>
+										<% end %>
+									<% end %>
+
+
+
 									<li> 
-										<button class="btn btn-default btn-sm vendorShow" data-hook="<%= serv.name  %>"id = "provider:<%= vendor.id  %>"> 
+										<button class="btn <%= @disable %> btn-sm vendorShow " data-hook="<%= serv.name  %>"id = "provider:<%= vendor.id  %>"> 
 										
 											<%= vendor.name  %>
 											

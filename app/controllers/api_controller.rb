@@ -66,10 +66,11 @@ class ApiController < ApplicationController
 				confirmed_service: confirmed.id,
 				vendor_name: vendor.name,
 				service_name: serv.name,
-				event: event.id
+				event: event.id,
+				vendor_id: vendor.id
 			}
 		else
-			render status: 404 , json: {response: "Failed"}
+			render status: 300 , json: {response: "Failed"}
 		end
 		
 
