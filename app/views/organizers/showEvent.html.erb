@@ -78,14 +78,15 @@
       		<% services = Service.all %>
       		<% services.each do |serv| %>
       			<li>
-      				<p>
-	      				<h5><%= serv.name  %></h5>
+      				<h5><%= serv.name  %></h5>
+      				<ul class="list-inline">
+      				
+	      				
 
 	      					<% vendors = User.where(:role => "vendor") %>
 	      					
 	      					<% vendors.each do |vendor| %>
-	      					<% p vendor.first_name %>
-	      					<ul class="list-inline">
+	      					
 								<% if vendor.services.any? { |item| item[:name] == serv.name } %>
 									<li> 
 										<button class="btn btn-default btn-sm vendorShow" data-hook="<%= serv.name  %>"id = "provider:<%= vendor.id  %>"> 
@@ -96,9 +97,9 @@
 									</li>
 								<% end %>
 
-	      					</ul>
+	      					
 	      					<% end %>
-	      			</p>
+	      			</ul>
       			</li>
       		<% end %>
       	</ul>

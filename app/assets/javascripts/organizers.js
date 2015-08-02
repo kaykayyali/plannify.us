@@ -62,7 +62,7 @@
 					$("#vendorModalLabel").text(data.title);
 					$(".addProviderButton").prop('id', data.title);
 					$("#vendorOwnerLabel").text(data.owner);
-					$("#vendorEmailLabel").text(data.email);
+					$("#vendorEmailLabel").html("<a href='mailto:" + data.email + "'> " + data.email + "</a>");
 					
 
 
