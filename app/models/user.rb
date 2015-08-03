@@ -10,6 +10,13 @@ class User < ActiveRecord::Base
 	has_many :comments
 	has_many :messages_from, :foreign_key => :from_id, class_name: 'Message'
 	has_many :messages_to, :foreign_key => :to_id, class_name: 'Message'
+  has_one :profile
+
+
+
+  def name
+    return "#{first_name} #{last_name}"
+  end
 
 
 end

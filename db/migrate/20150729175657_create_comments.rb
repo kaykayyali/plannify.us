@@ -4,6 +4,7 @@ class CreateComments < ActiveRecord::Migration
     	t.references :user, index: true
     	t.references :event, index: true
     	t.text :content
+    	t.boolean :read
 
       t.timestamps null: false
     end

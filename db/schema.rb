@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150731165005) do
+ActiveRecord::Schema.define(version: 20150803062638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20150731165005) do
     t.integer  "user_id"
     t.integer  "event_id"
     t.text     "content"
+    t.boolean  "read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(version: 20150731165005) do
     t.string   "state"
     t.string   "city"
     t.string   "address"
+    t.integer  "guestcount"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -75,10 +77,29 @@ ActiveRecord::Schema.define(version: 20150731165005) do
     t.string   "from_id"
     t.string   "to_id"
     t.text     "content"
+    t.boolean  "read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean  "read"
   end
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "owner"
+    t.string   "city"
+    t.string   "state"
+    t.string   "weburl"
+    t.string   "last_name"
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "imageurl"
+    t.decimal  "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
   create_table "services", force: :cascade do |t|
     t.string   "name"
@@ -102,11 +123,6 @@ ActiveRecord::Schema.define(version: 20150731165005) do
     t.datetime "updated_at",                          null: false
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "name"
-    t.string   "owner"
-    t.string   "city"
-    t.string   "state"
-    t.decimal  "rating"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

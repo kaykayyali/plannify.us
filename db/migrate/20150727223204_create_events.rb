@@ -9,6 +9,7 @@ class CreateEvents < ActiveRecord::Migration
     	t.string :state
     	t.string :city
     	t.string :address
+      t.integer :guestcount
       t.references :user, index: true
     	
 
