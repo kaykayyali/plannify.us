@@ -1,4 +1,8 @@
 
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+
+
+
 <div class="container wow fadeInLeft animated">
 	<h3>Add a new event </h3>
 	<hr>
@@ -13,11 +17,11 @@
 				
 					<div class="form-group col-lg-12 col-md-12 negative-margin">
 					
-					  <%= f.text_field :name, :class => 'form-control', :placeholder => "Name" %><br />
+					  <%= f.text_field :name, :class => 'form-control', :placeholder => "Event Name" %><br />
 					</div>
-					<div class="form-group col-lg-10 col-md-10 negative-margin">
-							
-					  <%= f.text_field :venue, :class => 'form-control', :placeholder => "Venue" %><br />
+					<div class="form-group col-lg-10 col-md-10 negative-margin" id="locationField">
+
+					  <%= f.text_field :venue, :class => 'form-control', :placeholder => "Venue Name" %><br />
 					</div>
 					<div class="form-group col-lg-2 col-md-2 negative-margin">
 							
@@ -46,23 +50,27 @@
 
 					<div class="form-group col-lg-8 col-md-8 negative-margin">
 			
-					  <%= f.text_field :address, :class => 'form-control', :placeholder => "Address" %><br />
+					  <%= f.text_field :address, :class => 'form-control', :placeholder => "Address", :id => "autocomplete", :onFocus => "geolocate()" %><br />
 					</div>
+
+						<input class="hidden" id = "street_number" type="text" name="event[route]">
+						<input class="hidden" id = "route" type="text" name="event[route]">
 
 					<div class="form-group col-lg-4 col-md-4 negative-margin">
 			
-					  <%= f.text_field :zipcode, :class => 'form-control', :placeholder => "Zipcode" %><br />
+					  <%= f.text_field :zipcode, :class => 'form-control', :placeholder => "Zipcode", :id => "postal_code", :disabled => "true" %><br />
 					</div>
 
 					<div class="form-group col-lg-8 col-md-8 negative-margin">
 
-					  <%= f.text_field :city, :class => 'form-control', :placeholder => "City" %><br />
+					  <%= f.text_field :city, :class => 'form-control field', :placeholder => "City", :id => "locality", :disabled => "true" %><br />
 					</div>
+				
 
 
 					<div class="form-group col-lg-4 col-md-4">
 		
-					  <%= f.text_field :state, :class => 'form-control', :placeholder => "State" %><br />
+					  <%= f.text_field :state, :class => 'form-control', :placeholder => "State", :id => "administrative_area_level_1", :disabled => "true" %><br />
 					</div>
 					<div class="form-group col-lg-12 col-md-12">
 					  <%= f.submit 'Submit', :class => "btn btn-primary btn-lg btn-wide"  %>
@@ -75,5 +83,91 @@
 			<% end %>
 		</div>
 </div>
+
+   <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+    </style>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    
+    <script>
+// This example displays an address form, using the autocomplete feature
+// of the Google Places API to help users fill in the information.
+
+var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  postal_code: 'short_name'
+};
+
+function initialize() {
+  // Create the autocomplete object, restricting the search
+  // to geographical location types.
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+      { types: ['geocode'] });
+  // When the user selects an address from the dropdown,
+  // populate the address fields in the form.
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    fillInAddress();
+  });
+}
+
+// [START region_fillform]
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+
+  for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    document.getElementById(component).disabled = false;
+  }
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+    }
+  }
+}
+// [END region_fillform]
+
+// [START region_geolocation]
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = new google.maps.LatLng(
+          position.coords.latitude, position.coords.longitude);
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+// [END region_geolocation]
+
+    </script>
+
+    
+
+  <body onload="initialize()">
+    
+
+  </body>
+</html>
 
 

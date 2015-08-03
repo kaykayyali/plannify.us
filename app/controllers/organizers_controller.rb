@@ -36,7 +36,8 @@ class OrganizersController < ApplicationController
 		event.zipcode = params[:event]["zipcode"]
 		event.city = params[:event]["city"]
 		event.state = params[:event]["state"]
-		event.address = params[:event]["address"]
+		address = params[:event]["address"].split(',')
+		event.address = address[0]
 		event.guestcount = params[:event]["guestcount"]
 		
 		event.start_date = datetime_builder(params[:event]["start_date"],params[:event]["start_time"])	
