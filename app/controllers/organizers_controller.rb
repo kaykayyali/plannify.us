@@ -37,6 +37,7 @@ class OrganizersController < ApplicationController
 		event.city = params[:event]["city"]
 		event.state = params[:event]["state"]
 		event.address = params[:event]["address"]
+		event.guestcount = params[:event]["guestcount"]
 		
 		event.start_date = datetime_builder(params[:event]["start_date"],params[:event]["start_time"])	
 		event.end_date = datetime_builder(params[:event]["end_date"], params[:event]["end_time"])	
@@ -75,7 +76,7 @@ class OrganizersController < ApplicationController
 	end
 
 		def event_params
-		params.require(:event).permit(:name, :start_date, :venue, :address, :zipcode, :city, :state, :start_time, :end_time, :end_time)
+		params.require(:event).permit(:name, :start_date, :venue, :address, :zipcode, :city, :state, :start_time, :end_time, :end_time, :guestcount)
 	end
 	def datetime_builder(date,time)
 		if date.present? && time.present?
