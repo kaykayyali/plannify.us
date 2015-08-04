@@ -13,7 +13,7 @@ Event.create!([
 ])
 Profile.create!([
   {user_id: 1, first_name: "Kaysser", owner: "Eddie Kayyali", city: "North Miami Beach", state: "FL", weburl: "www.macparking.co", last_name: "Kayyali", name: "Mac Parking inc.", email: "kaykayyali@macparking.co", phone: "3053181328", imageurl: "https://www.filepicker.io/api/file/r2vabUu1ShGhZOIeBAaG", rating: "5.0", description: "The greatest valet company on the face of the planet", message: "A place to park.", address: "1835 NE Miami Gardens Dr", zipcode: "33179", service_type: nil},
-  {user_id: 3, first_name: "Gloria", owner: "Gloria Valencia", city: "North Miami Beach", state: "FL", weburl: "www.flowers.com", last_name: "Valencia", name: "Flower Power", email: "gvale014@fiu.edu", phone: "3054670704", imageurl: "http://a121.g.akamai.net/7/121/21164/20150227144413/flowercontent.net/fyf/images/products/large/T46-1.jpg", rating: nil, description: nil, message: "Flowers!", address: "1835 NE Miami Gardens Dr", zipcode: "33179", service_type: "4"}
+  {user_id: 2, first_name: "Gloria", owner: "Gloria Valencia", city: "North Miami Beach", state: "FL", weburl: "www.flowers.com", last_name: "Valencia", name: "Flower Power", email: "gvale014@fiu.edu", phone: "3054670704", imageurl: "http://a121.g.akamai.net/7/121/21164/20150227144413/flowercontent.net/fyf/images/products/large/T46-1.jpg", rating: nil, description: nil, message: "Flowers!", address: "1835 NE Miami Gardens Dr", zipcode: "33179", service_type: "4"}
 ])
 Service.create!([
   {name: "Lighting"},
