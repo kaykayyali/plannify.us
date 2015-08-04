@@ -24,7 +24,7 @@
 			
 				
 				var request = $.post('/api/events/addservice',eventName)
-
+				request.error(function(data){console.log(data)})
 				request.done(function(data){
 					$("#viewVendorModal").modal('hide')
 					$('.confirmedServicesList').append("<li data-hook='service:"+data.confirmed_service+"'><p><span class='highlight'>"+data.vendor_name+"</span> " +data.service_name +"</p></li>");
@@ -40,7 +40,7 @@
 					$("[id~='provider:" + data.vendor_id +"']").addClass("btn-success")
 					$("[id~='provider:" + data.vendor_id +"']").removeClass("btn-default")
 
-					$.post('/api/message/send_confirmation', message, function(data){console.log(data.response)})
+					
 					$('a[data-remote]').on("ajax:success", function(event, data, status, xhr) {
 			
 							$("#" + String(data.response)).remove()

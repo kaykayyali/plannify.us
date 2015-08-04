@@ -27,6 +27,9 @@
 					<button  data-toggle="modal" data-target="#viewservicesModal" class="btn btn-default">
 						View services
 					</button>
+					<button  class="btn btn-success" onclick="confirm('This will alert all vendors')">
+						Confirm Event
+					</button>
 					<br>
 					<hr>
 
@@ -124,7 +127,7 @@
 									<li> 
 										<button class="btn <%= @disable %> btn-sm vendorShow " data-hook="<%= serv.name  %>"id = "provider:<%= vendor.id  %>"> 
 										
-											<%= vendor.name  %>
+											<%= vendor.profile.name  %>
 											
 										</button> 
 									</li>

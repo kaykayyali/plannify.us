@@ -49,7 +49,7 @@
     </div>
 		<% if current_user.role == "vendor"   %>
 			<div class="form-group">
-			<%= select_tag "people", options_from_collection_for_select(@services, "id", "name") %>
+			<%= f.select :service_type, options_from_collection_for_select(@services, "id", "name") %>
 			</div>
 		<% end %>
     <%= f.submit "Update Profile", :class => "btn btn-primary btn-wide col-lg-12", :remote => "true" %>

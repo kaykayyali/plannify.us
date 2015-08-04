@@ -33,7 +33,8 @@ gem 'devise'
 gem 'bcrypt', '~> 3.1.7'
 gem 'seed_dump'
 gem 'simple_form'
-
+gem 'omniauth-facebook'
+gem 'pry'
 gem 'puma'
 # Use Unicorn as the app server
 # gem 'unicorn'

@@ -27,19 +27,19 @@
 									</div>
 									<div class="col-sm-8 col-xs-8">
 										<h1><%= @profile.name %> <br> <small><%= @profile.message  %></small></h1>
-
 										<h3><%= @profile.owner %><small> Owner</small> </h3>
+										<h4><a href="<%= @profile.weburl %>"><%= @profile.weburl%></a></h4>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-12 col-xs-12">
 									<h3><%= number_to_phone(@profile.phone.to_i) %></h3>
-									<h4><a href="mailto:"><%= @profile.email %></a></h4>	
+									<h4><a href="mailto:"><%= @profile.email %></a></h4>
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-6 col-xs-12">
-								<img src="https://maps.googleapis.com/maps/api/staticmap?markers=color:red%7Clabel:S%7C<%= @user.profile.address%>&size=600x300&maptype=roadmap&zoom=15" class="img img-thumbnail" width="100%">
+								<img src="https://maps.googleapis.com/maps/api/staticmap?markers=color:red%7Clabel:S%7C<%= @profile.address%><%=@profile.city%><%=@profile.state%>&size=600x300&maptype=roadmap&zoom=15" class="img img-thumbnail" width="100%">
 							</div>
 						</div>
 				</div>

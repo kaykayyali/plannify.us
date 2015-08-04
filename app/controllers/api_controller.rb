@@ -52,16 +52,19 @@ class ApiController < ApplicationController
 	def add_service
 		event = Event.find_by(id: params[:eventid])
 		serv = Service.find_by(name: params[:service])
-		vendor = User.find_by(name: params[:name])
+		vendor = Profile.find_by(name: params[:name])
+		p event
+		p serv
+		p vendor
 
-		associatedServ = AssociatedService.where(:service_id => serv.id, :user_id => vendor.id )
+		associatedServ = AssociatedService.where(:service_id => serv.id, :user_id => vendor.user_id )
 		p associatedServ
 
 
 		if associatedServ.present? && check_for_confirmed_service(event, associatedServ) == false
 			confirmed = ConfirmedService.create(:event_id => event.id, :associated_service_id => associatedServ[0].id)
 			event.confirmed_services.push(confirmed)
-			confirmed.id
+			p confirmed.id
 			render json: {
 				confirmed_service: confirmed.id,
 				vendor_name: vendor.name,
@@ -87,10 +90,10 @@ class ApiController < ApplicationController
 	def vendor_info
 		vendor = User.find_by(id: params[:id])
 		render json: {
-			title: vendor.name,
-			owner: vendor.owner,
-			services: vendor.services,
-			email: vendor.email
+			title: vendor.profile.name,
+			owner: vendor.profile.owner,
+			services: vendor.profile.service_type,
+			email: vendor.profile.email
 		}
 	end
 
