@@ -1,61 +1,46 @@
+<script>
+	$('#navbarUL').append("<li class='navbar-text pull-right'><a href='#'type='button' data-toggle='modal' data-target='#organizersModal'>View Organizers</a></li>");
 
+	$('#navbarUL').append("<li class='navbar-text pull-right'><a href='#'type='button' data-toggle='modal' data-target='#messagesModal'>View Messages</a></li>");
+</script>
 <div class="container-fluid wow fadeInLeft animated">
 
 	
 	
 	<div class="col-lg-12">
+	<h1>Upcoming</h1>
+	<hr>
 	<br>
-		<div class="panel panel-default light-blue panel-border-black">
-			<div class="panel-heading clearfix">
-				
-
-					<h2 class="pull-left">Events Looking for Services</h2> 
-					<br>
-				</div>
-				<div class="panel-body">
-					<% if @events.present? %>
-						<% @events.each do |event| %>
-							<div class="col-lg-4">
-								<a href="/vendors/examineevent/<%= event.id %>" style='color:black;'>
-									<div class="panel panel-default panel-border-grey ex1 text-center">
-										<div class="panel-heading">
-											<% servicing = false %>
-											<% event.confirmed_services.each do |serv| %>
-												<% association = AssociatedService.find_by(:id => serv.associated_service_id) %>
-												<% if association.service_id = current_user.id %>
-													<% servicing = true %>
-												<% end %>
-											<% end %>
-											
-											<h4><%= event.name  %> <br> <small><%= event.venue  %></small> <% if servicing == true%>
-											<span class="label label-success">Servicing</span>
-											<% end %></h4>
-										</div>
-										<div class="panel-body">
-											Posted by: <%= User.find_by(:id => event.user_id).first_name  %> <%= User.find_by(:id => event.user_id).last_name  %><br>
-											Start time: <%= pretty_date(event.start_date)  %> <br>
-											End time: <%= pretty_date(event.end_date)  %> <br>
-											<%= event.city  %>, <%= event.state  %> <br>
-											<%= event.address %>
-											<%= event.zipcode  %>
-											
-											
-										</div>
-
-									</div>
-								</a>
+		<% if @events.present? %>
+			<% @events.each do |event| %>
+				<div class="col-lg-3">
+					<a href="/vendors/examineevent/<%= event.id %>" style='color:black;'>
+						<div class="panel panel-default panel-border-grey ex1 text-center">
+							<div class="panel-body">
+								<% servicing = false %>
+								<% event.confirmed_services.each do |serv| %>
+									<% association = AssociatedService.find_by(:id => serv.associated_service_id) %>
+									<% if association.service_id = current_user.id %>
+										<% servicing = true %>
+									<% end %>
+								<% end %>
+								<h4><%= event.name  %> <br> <small><%= event.venue  %></small> <% if servicing == true%>
+								<span class="label label-success">Servicing</span>
+								<% end %></h4>
+								<hr>
+								Posted by: <%= User.find_by(:id => event.user_id).first_name  %> <%= User.find_by(:id => event.user_id).last_name  %><br>
+								Start time: <%= pretty_date(event.start_date)  %> <br>
+								End time: <%= pretty_date(event.end_date)  %> <br>
+								<%= event.city  %>, <%= event.state  %> <br>
+								<%= event.address %>
+								<%= event.zipcode  %>
 							</div>
-						<% end %>
-					<% end %>
-					
-			
-			</div>
-
-		</div>
+						</div>
+					</a>
+				</div>
+			<% end %>
+		<% end %>
 	</div>
-	
-
-	
 </div>
 
 
@@ -100,8 +85,3 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<script>
-	$('#navbarUL').append("<li class='navbar-text pull-right'><a href='#'type='button' data-toggle='modal' data-target='#organizersModal'>View Organizers</a></li>");
-
-	$('#navbarUL').append("<li class='navbar-text pull-right'><a href='#'type='button' data-toggle='modal' data-target='#messagesModal'>View Messages</a></li>");
-</script>

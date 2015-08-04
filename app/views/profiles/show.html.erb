@@ -6,29 +6,67 @@
 	<br>
 	<div class="panel panel-default  panel-border-black">
 			<div class="panel-heading">
-				<h3><%= @user.name  %><small> <%= @user.profile.name  %> </small></h3>
+				<div class="container-fluid">
+					<div class="col-lg-10 col-md-8 col-sm-12">
+						<h3><%= @user.name  %><small> <%= @profile.name  %> </small></h3>
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-12 text-right">
+						<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Edit Profile</button>
+					</div>
+				</div>
 			</div>
 
-			<div class="panel-body light-red">
+			<div class="panel-body light-blue">
+				<div class="container-fluid">
+					
+						<div class="row">
+							<div class="col-lg-6 col-sm-12 col-xs-12">
+								<div class="row">
+									<div class="col-sm-4 col-xs-4">
+										<img src="<%= @user.profile.imageurl %>" width = "100%"%>
+									</div>
+									<div class="col-sm-8 col-xs-8">
+										<h1><%= @profile.name %> <br> <small><%= @profile.message  %></small></h1>
 
-			
-				
-			
-				
+										<h3><%= @profile.owner %><small> Owner</small> </h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 col-xs-12">
+									<h3><%= number_to_phone(@profile.phone.to_i) %></h3>
+									<h4><a href="mailto:"><%= @profile.email %></a></h4>	
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-xs-12">
+								<img src="https://maps.googleapis.com/maps/api/staticmap?markers=color:red%7Clabel:S%7C<%= @user.profile.address%>&size=600x300&maptype=roadmap&zoom=15" class="img img-thumbnail" width="100%">
+							</div>
+						</div>
+				</div>
 			</div>	
 		</div>
 	</div>
 </div>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit your profile</h4>
+      </div>
+      <div class="modal-body">
+		<%= render "./partials/profile_form"  %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<% if current_user.present? && current_user.role != "vendor" %>
 <script>
-function goBack() {
-    window.history.back();
-}
+	$('#navbarUL').append("<li class='navbar-text pull-right'><a href='/organizer' >View your events</a></li>");
 
-$('#navbarUL').append("<li class='navbar-text pull-right'><a href='#' type='button' >Edit Profile</a></li>")
-
-
-
-					
 </script>
 
+<% end %>

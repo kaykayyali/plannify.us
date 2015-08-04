@@ -1,18 +1,15 @@
+<style>
+body{
+	background-color: rgba(119,119,119,0.1)
+}
+		
+</style>
 
 
-
-<header 'navbar navbar-inverse navbar-static-top' id="header" style="padding-top:0;">
-	<div class="container white-bg">
+<header 'navbar navbar-inverse navbar-static-top hovercontrol' id="header" style="padding-top:0;">
+	<div class="container white-bg hovercontrol">
 	
-	<style type="text/css">
-		body {
-			background-image: url("http://www.freelargeimages.com/wp-content/uploads/2015/06/White_Background_01.jpg");
-			background-position:top center;
-			background-size:cover;
-			position:relative;
-			height:auto;
-		}
-	</style>
+
 		
 			<ul class="nav navbar-nav pull-left" style="margin-top:16px;">
 				<li class="pull-left"> <a class="logo" >Plannify.us</a></li>
@@ -21,7 +18,7 @@
 		<nav>
 			<ul class="nav navbar-nav pull-right" style="padding:none;" id="navbarUL">
 				<% if current_user.present? %>
-					<li class="navbar-text pull-right">Signed in as <%= current_user.first_name %> <%= current_user.last_name  %></li>
+					<li class="navbar-text pull-right">Signed in as <%= current_user.name %></li>
 					
 					<!-- Temp Sign out -->
 					

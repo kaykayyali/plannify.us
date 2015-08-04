@@ -6,21 +6,13 @@
 	<br>
 	<div class="panel panel-default  panel-border-black">
 			<div class="panel-heading">
-				<div class="row">
-					<div class="col-md-6">
-					<h4>Details for <span class='highlight'><b><%= @event.name %></b></span></h4>
-					</div>
-
-					<div class="col-md-6">
-					<h4>Comments</h4>	
-					</div>
-				</div>
+				<h4>Details for <span class='highlight'><b><a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=<%= @event.name%>"><%= @event.name %></a></b></span></h4>
 			</div>
 
 			<div class="panel-body">
 				<div class="col-md-6">
 					<p> 
-						
+						 
 						<h4>Start time: <%= pretty_date(@event.start_date)  %></h4> 
 						<h4>End time: <%= pretty_date(@event.end_date)  %></h4> 
 						<h4>City: <%= @event.city  %>, <%= @event.state  %></h4> 
@@ -41,15 +33,41 @@
 					<a href="<%= organizer_path  %>" class="btn btn-primary">Back to events</a>
 					
 				</div>
-					<div class="col-md-6 " id="commentList">
-						
-							
-						
-						<div class="react_comments">
-							<%= react_component('CommentBox', props = {:url => "/api/events/#{@event.id}/comments", :pollInterval => 3000}) %>
+
+
+
+				<div class="col-lg-6">
+				<style>
+				.nav-tabs>li>a {
+					padding: 10px;
+				}
+				.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+					background-color:#0E8FAB;
+					color: white;
+				}
+				</style>
+				  <!-- Nav tabs -->
+				  <ul class="nav nav-tabs" role="tablist">
+				  	<li role="presentation" class="active"><a href="#map" aria-controls="map" role="tab" data-toggle="tab">Map</a></li>
+				    <li role="presentation"><a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Comments</a></li>
+				    
+				  </ul>
+
+				  <!-- Tab panes -->
+				  <div class="tab-content">
+				    <div role="tabpanel" class="tab-pane " id="comments">
+				    	<div class="col-md-12 " id="commentList">
+							<div class="react_comments">
+								<%= react_component('CommentBox', props = {:url => "/api/events/#{@event.id}/comments", :pollInterval => 1000}) %>
+							</div>	
 						</div>
-						
-					</div>
+				    </div>
+				    <div role="tabpanel" class="tab-pane active" id="map">
+				    	<img src="https://maps.googleapis.com/maps/api/staticmap?markers=color:red%7Clabel:S%7C<%= @event.address%>&size=600x300&maptype=roadmap&zoom=15" class="img img-thumbnail">
+				    </div>
+				  </div>
+
+				</div>
 			</div>
 				
 					
@@ -197,5 +215,10 @@
 <span data-hook="eventIDholder" id= "<%= @event.id %>" ></span>
 	
 
-
+<script>
+	$('#myTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+</script>
 

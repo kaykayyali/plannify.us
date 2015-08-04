@@ -28,11 +28,13 @@ Rails.application.routes.draw do
 
   post '/api/events/addservice' => 'api#add_service'
 #profiles
-  get '/profiles/:id' => 'profiles#show'
+  get '/profiles/:id' => 'profiles#show', as: :profile
+  put '/profiles/:id' => 'profiles#update'
 
 #messages
   post '/api/message/send_confirmation' => 'api#send_confirmation'
   get '/api/message/:id/messages' => 'api#serve_messages'
+  get '/api/messages/confirm_read' => 'api#confirm_messages'
 
   
   # The priority is based upon order of creation: first created -> highest priority.

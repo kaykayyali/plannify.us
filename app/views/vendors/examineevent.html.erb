@@ -25,12 +25,10 @@
 						<h4>Start time: <%= pretty_date(@event.start_date)  %></h4> 
 						
 						<h4>End time: <%= pretty_date(@event.end_date)  %></h4> 
-						
 						<h4>City: <%= @event.city  %>, <%= @event.state  %></h4> 
-						
 						<h4>Address: <%= @event.address %></h4>
-						
 						<h4>Zipcode: <%= @event.zipcode  %></h4>
+						<h4>Guest Count: <%= @event.guestcount.to_s  %></h4>
 					</p>
 					<br>
 					<button  data-toggle="modal" data-target="#myModal" class="btn btn-default">
@@ -41,31 +39,43 @@
 					<button onclick="goBack()" class="btn btn-primary">Go Back</button> 
 					<a class="btn btn-primary" href="<%= vendor_path  %>">Home</a>
 				</div>
-				<div class="col-md-6" id='commentList'>
-						
-							
-						
-						<div class="react_comments">
-							<%= react_component('CommentBox', props = {:url => "/api/events/#{@event.id}/comments", :pollInterval => 3000}) %>
-						</div>
-						
+				
+				<style>
+				.nav-tabs>li>a {
+					padding: 10px;
+				}
+				.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+					background-color:#0E8FAB;
+					color: white;
+				}
+				</style>
+				<div class="col-md-6">
+						<ul class="nav nav-tabs" role="tablist">
+						  	<li role="presentation" class="active"><a href="#map" aria-controls="map" role="tab" data-toggle="tab">Map</a></li>
+						    <li role="presentation"><a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Comments</a></li>
+						 </ul>
+
+					  <!-- Tab panes -->
+					  <div class="tab-content">
+					    <div role="tabpanel" class="tab-pane " id="comments">
+					    	<div class="col-md-12 " id="commentList">
+								<div class="react_comments">
+									<%= react_component('CommentBox', props = {:url => "/api/events/#{@event.id}/comments", :pollInterval => 1000}) %>
+								</div>	
+							</div>
+					    </div>
+					    <div role="tabpanel" class="tab-pane active" id="map">
+					    	<img src="https://maps.googleapis.com/maps/api/staticmap?markers=color:red%7Clabel:S%7C<%= @event.address%>&size=600x300&maptype=roadmap&zoom=15" class="img img-thumbnail">
+					    </div>
+					  </div>
 					</div>
 				</div>
 			</div>
-				
-					
-					
-
-
-				
-				
-			</div>
-			
 		</div>
-	
+			
 	</div>
 	
-
+</div>
 	
 </div>
 
@@ -102,4 +112,6 @@
 function goBack() {
     window.history.back();
 }
+
+$('#navbarUL').append("<li class='navbar-text pull-right'><a href='/vendor' type='button'>View Events</a></li>");
 </script>
