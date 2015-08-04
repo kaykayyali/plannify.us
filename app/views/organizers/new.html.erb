@@ -10,13 +10,30 @@
 		</div>
 		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
 			<br>
-			<a href="<%= organizer_path  %>" class="btn btn-default">Back to events</a>
+			<a href="<%= calendar_path  %>" class="btn btn-default">Back to calendar</a>
 		</div>
 	</div>
 	
 	<hr>
 	<div class="col-lg-10 col-md-10  center-block">
-	
+	<% flash.each do |key, value| %>
+	<style>
+	.placement {
+		color: red;
+	}
+	</style>
+          <div class="alert alert-dismissible alert-<%= key.to_s == 'notice' ? 'success' : 'danger' %>" role="alert">
+           <button type="button" class="close" data-dismiss="alert">
+             <span aria-hidden="true">
+              &times;
+             </span>
+             <span class="sr-only">
+              Close
+             </span>
+             </button>
+               <%= value if value.is_a?(String) %>
+          </div>
+        <% end %>
 	<br>
 		<div class="container-fluid">
 		<%= form_for :event do |f| %>
@@ -25,8 +42,8 @@
 		    	
 				
 					<div class="form-group col-lg-12 col-md-12 negative-margin">
-					
-					  <%= f.text_field :name, :class => 'form-control', :placeholder => "Event Name" %><br />
+					  	<%= f.text_field :name, :class => 'form-control required', :placeholder => "Event Name" %><br />
+					  	<i class="fa fa-asterisk placement"></i>
 					</div>
 					<div class="form-group col-lg-10 col-md-10 negative-margin" id="locationField">
 
@@ -34,17 +51,18 @@
 					</div>
 					<div class="form-group col-lg-2 col-md-2 negative-margin">
 							
-					  <%= f.text_field :guestcount, :class => 'form-control', :placeholder => "Guest Count" %><br />
+					  <%= f.text_field :guestcount, :class => 'form-control required', :placeholder => "Guest Count" %><br />
+					  <i class="fa fa-asterisk placement"></i>
 					</div>
 					
 					<div class="form-group col-lg-6 col-md-6 negative-margin">
 					  <%= f.label :start_date  %>
-					  <%= f.date_field :start_date, :class => 'form-control negative-margin', :placeholder => "" %><br />
+					  <%= f.date_field :start_date, :class => 'form-control negative-margin',:value => Time.now.strftime("%Y-%m-%d") %><br />
 					</div>
 
 					<div class="form-group col-lg-6 col-md-6 negative-margin">
 					  <%= f.label :start_time  %>
-					  <%= f.time_field :start_time, :class => 'form-control negative-margin', :placeholder => "" %><br />
+					  <%= f.time_field :start_time, :class => 'form-control negative-margin',:value => Time.now.strftime('%H:%M') %><br />
 					</div>
 
 					<div class="form-group col-lg-6 col-md-6 negative-margin">
@@ -59,7 +77,8 @@
 
 					<div class="form-group col-lg-8 col-md-8 negative-margin">
 			
-					  <%= f.text_field :address, :class => 'form-control', :placeholder => "Address", :id => "autocomplete", :onFocus => "geolocate()" %><br />
+					  <%= f.text_field :address, :class => 'form-control required', :placeholder => "Address", :id => "autocomplete", :onFocus => "geolocate()" %><br />
+					  <i class="fa fa-asterisk placement"></i>
 					</div>
 
 						<input class="hidden" id = "street_number" type="text" name="event[route]">
@@ -168,7 +187,7 @@ function geolocate() {
   }
 }
 // [END region_geolocation]
-
+$('#navbarUL').append("<li class='navbar-text pull-right'><a href='/api/calendar/basic'>View Calendar</a></li>");
     </script>
 
     

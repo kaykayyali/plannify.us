@@ -163,6 +163,32 @@ class ApiController < ApplicationController
 		
 		
 	end
+	def calendar
+		render 'calendar'
+	end
+	def send_events
+		if current_user.role == "organizer"
+			eventFilter = current_user.events
+		elsif current_user.role == "vendor"
+
+			eventFilter = Event.all.where(:confirmed => false)
+		end
+		events = eventFilter
+		eventsArray = []
+		events.each do |event|
+			newEvent = {
+				title: event.name,
+				start: event.start_date,
+				url: '/organizers/showevent/' + event.id.to_s,
+				allDay: false,
+       			editable: true
+			}
+			eventsArray.push(newEvent)
+		end
+
+		render json: eventsArray, status: 200
+
+	end
 
 	private 
 	  def format_date(date)

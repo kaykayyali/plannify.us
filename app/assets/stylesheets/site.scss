@@ -6,3 +6,24 @@
 	text-align: center;
 	color: #ffffff;
 }
+.calendar {
+ 	max-width: 900px;
+ 	background-color: rgba(247, 238, 223, 0.5);
+ 	padding: 30px;
+ 	border: solid 1px;
+ 	border-radius: 8px;
+}
+td.fc-widget-content.fc-day{
+  -webkit-transition: background-color 0.3s ease-out;
+  -moz-transition: background-color 0.3s ease-out;
+  -o-transition: background-color 0.3s ease-out; 
+}
+td.fc-widget-content.fc-day:hover {
+	background-color:rgba(144,216,243,0.5);
+}
+#calendar {
+	background-color:white;
+	border-radius: 8px;
+	padding: 10px;
+	border: lightgrey double 4px;
+}

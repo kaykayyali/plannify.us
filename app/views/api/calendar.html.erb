@@ -1,0 +1,52 @@
+<div class="container wow fadeInLeft animated">
+	<div class="col-lg-3 center-block text-center">
+		<h2>Events <span class="highlight">Calendar</span></h2>
+	</div>
+	<hr>
+</div>
+</div>
+<div class="container wow fadeInLeft animated calendar">
+	<div class="row">
+		<div class="col-xl-12 col-lg-12 " >
+				<div id='calendar' ></div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<script>
+$('#navbarUL').append("<li class='navbar-text pull-right'><a href='<%= organizers_addevent_path %>'>Add Event</a></li>");
+$('#navbarUL').append("<li class='navbar-text pull-right'><a href='<%= '/organizer/' + Date.today.to_s %>'>Today's Events</a></li>");
+$(document).ready(function() {
+
+    // page is now ready, initialize the calendar...
+
+    $('#calendar').fullCalendar({
+    	
+        // put your options and callbacks here
+        eventSources: [
+
+		        // your event source
+		        {
+		            url: '/api/events/calendar_get', // use the `url` property
+		            color: 'rgba(248,107,22,0.8)',    // an option!
+		            textColor: 'white',  // an option!
+		            borderColor: 'lightgrey'
+
+		        }
+
+		        // any other sources...
+
+		    ],
+
+		dayClick: function(date, jsEvent, view) {
+	        window.location.replace("/organizer/"+ date.format())
+	    }
+
+		   
+    })
+
+});
+</script>

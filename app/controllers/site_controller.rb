@@ -6,14 +6,12 @@ class SiteController < ApplicationController
 
 	private
 	def check_for_user
-		if current_user.present?
-			if current_user.role == "vendor"
-				redirect_to "/vendor"
-			elsif current_user.role == "organizer"
-				redirect_to "/organizer"
-			elsif current_user.role == "staff"
-				redirect_to "/staff"
-			end		
+		if current_user.present? && current_user.role != "staff"
+			redirect_to calendar_path
+		elsif current_user.present? && current_user.role == "staff"
+			render 'sorry'
+		else
+			render 'index'
 		end
 	end
 end

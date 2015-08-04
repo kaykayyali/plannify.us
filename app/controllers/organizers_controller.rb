@@ -3,7 +3,10 @@ class OrganizersController < ApplicationController
 	before_action :ensure_organizer
 	def index
 		@vendors = User.where(:role => 'vendor')
-		@events = current_user.events
+		date = Date.parse(params[:date])
+		searchDate = DateTime.new(date.year, date.month, date.day)
+		@events = current_user.events.where('start_date BETWEEN ? AND ?', searchDate.beginning_of_day, searchDate.end_of_day).all
+		
 		render 'index'
 	end
 
@@ -46,8 +49,9 @@ class OrganizersController < ApplicationController
 
 		if event.save
 			
-			redirect_to organizer_path
+			redirect_to calendar_path
 		else
+			flash[:alert] = "Please fill in the required paths."
 			redirect_to organizers_addevent_path
 		end
 	end
@@ -85,7 +89,7 @@ class OrganizersController < ApplicationController
 			parse_time = Time.parse(time)
 			return DateTime.new(parse_date.year, parse_date.month, parse_date.day, parse_time.hour, parse_time.min)
 		else 
-			return DateTime.now
+			return nil
 		end
 	end
 end

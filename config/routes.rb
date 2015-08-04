@@ -12,9 +12,9 @@ Rails.application.routes.draw do
         
 
 #organizers
-    get '/organizer' => 'organizers#index'
+    get '/organizer/:date' => 'organizers#index'
       
-      get '/organizers/addevent' => 'organizers#new'
+      get '/organizers/addevent' => 'organizers#new' 
       post '/organizers/addevent' => 'organizers#create'
       get '/organizers/showevent/:id' => 'organizers#event_show'
       delete 'organizer/deleteevent/:id' => 'organizers#event_delete'
@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   post '/api/message/send_confirmation' => 'api#send_confirmation'
   get '/api/message/:id/messages' => 'api#serve_messages'
   get '/api/messages/confirm_read' => 'api#confirm_messages'
+  get '/calendar' => 'api#calendar', as: :calendar
+  get '/api/events/calendar_get' => 'api#send_events'
 
   
   # The priority is based upon order of creation: first created -> highest priority.
