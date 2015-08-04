@@ -5,11 +5,15 @@
 	<div class="col-lg-11 center-block">
 	<br>
 	<div class="panel panel-default  panel-border-black">
-			<div class="panel-heading">
-				<h4>Details for <span class='highlight'><b><a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=<%= @event.name%>"><%= @event.name %></a></b></span></h4>
-			</div>
-
+			
 			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<h4>Details for <span class='highlight'><b><a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=<%= @event.name%>"><%= @event.name %></a></b></span></h4>
+					</div>
+				</div>
+				<hr>
+
 				<div class="col-md-6">
 					<p> 
 						 
@@ -148,7 +152,7 @@
 </div>
 
 <div class="modal fade" id="viewservicesModal" tabindex="-1" role="dialog" aria-labelledby="viewServicesModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-dialog " role="document">
     <div class="modal-content ">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -156,13 +160,13 @@
       </div>
       <div class="modal-body confirmedServicesList">
       		<% @event.confirmed_services.each do |serv| %>
-      			<li data-hook="service:<%= serv.id %>">
-      			<%= link_to 'X', "/api/event/#{@event.id}/deleteconfirmedservice/#{serv.id}", data: { :confirm => 'Are you sure?', method: :delete}, remote: true , :class => "btn btn-sm btn-danger pull-right"   %>
+      			<li data-hook="service:<%= serv.id %>" class = "fancify">
+      			<%= link_to 'X', "/api/event/#{@event.id}/deleteconfirmedservice/#{serv.id}", data: { :confirm => 'Are you sure?', method: :delete}, remote: true , :class => "btn btn-sm btn-danger pull-right btn-edit"   %>
       				<p>
 	      				
 	      					<% association = AssociatedService.find_by(:id => serv.associated_service_id) %>
-	      					<span class="highlight"><%= User.find_by(:id => association.user_id).name  %></span>
-	      					<%= Service.find_by(:id => association.service_id).name  %>
+	      					<h3><span class="highlight"><%= User.find_by(:id => association.user_id).name  %></span>
+	      					<%= Service.find_by(:id => association.service_id).name  %></h3>
 	      					
 	      			
 	      			</p>
@@ -223,5 +227,10 @@
   e.preventDefault()
   $(this).tab('show')
 })
+	$(".btn-edit").hover(
+		function(){$(this).parent().css("background-color","rgba(243,57,57,0.5)");
+	},
+		function(){$(this).parent().css("background-color", "")}
+	);
 </script>
 

@@ -15,6 +15,19 @@
 	border: 1px solid grey;
 
 }
+.fancify {
+    -webkit-transition: background-color 0.6s ease-out;
+  -moz-transition: background-color 0.6s ease-out;
+  -o-transition: background-color 0.6s ease-out; 
+
+}
+li.fancify {
+  list-style-type: none;
+  border-radius: 10px;
+  margin-bottom:5px;
+  margin-top:5px;
+
+}
 .ex1 { 
 	-webkit-transition: background-color 0.6s ease-out;
 	-moz-transition: background-color 0.6s ease-out;
