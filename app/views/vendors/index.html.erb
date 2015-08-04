@@ -3,6 +3,13 @@
 
 	$('#navbarUL').append("<li class='navbar-text pull-right'><a href='#'type='button' data-toggle='modal' data-target='#messagesModal'>View Messages</a></li>");
 </script>
+<style>
+	.label-edit {
+		position: absolute;
+		top: 15px;
+		right: 28px;
+	}
+</style>
 <div class="container-fluid wow fadeInLeft animated">
 
 	
@@ -13,7 +20,7 @@
 	<br>
 		<% if @events.present? %>
 			<% @events.each do |event| %>
-				<div class="col-lg-3">
+				<div class="col-lg-3" style="position:relative;">
 					<a href="/vendors/examineevent/<%= event.id %>" style='color:black;'>
 						<div class="panel panel-default panel-border-grey ex1 text-center">
 							<div class="panel-body">
@@ -24,9 +31,10 @@
 										<% servicing = true %>
 									<% end %>
 								<% end %>
-								<h4><%= event.name  %> <br> <small><%= event.venue  %></small> <% if servicing == true%>
-								<span class="label label-success">Servicing</span>
-								<% end %></h4>
+								<h4><%= event.name  %> <br> <small><%= event.venue  %></small></h4> <% if servicing == true%>
+								<span class="label label-success label-edit">Servicing</span>
+								<style> .ex1 {background-color: rgba(92,184,92,0.2)}</style>
+								<% end %>
 								<hr>
 								Posted by: <%= User.find_by(:id => event.user_id).first_name  %> <%= User.find_by(:id => event.user_id).last_name  %><br>
 								Start time: <%= pretty_date(event.start_date)  %> <br>
@@ -55,7 +63,7 @@
      	<ul class="list-unstyled">
 			<% @organizers.each do |organizer|  %>
 				<li>
-				<h4 style="display: inline"><a href="<%= '/vendors/examineorganizer/' + organizer.id.to_s  %>" ><b><%= organizer.first_name  %> <%= organizer.last_name  %></b></a></h4>
+				<h4 style="display: inline"><a href="<%= profile_path(organizer.id)  %>" ><b><%= organizer.first_name  %> <%= organizer.last_name  %></b></a></h4>
 				</li>
 				<hr>
 			<%  end %>

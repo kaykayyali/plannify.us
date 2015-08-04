@@ -80,10 +80,10 @@
 					<% @vendors.each do |vendor| %>
 						<li>
 							<h4 style="display:inline;"> 
-								<a href="/organizers/examinevendor/<%= vendor.id  %>" ><b><%= vendor.first_name  %> <%= vendor.last_name  %></b>
+								<a href="<%= profile_path(vendor.id)  %>" ><b><%= vendor.name  %></b>
 								</a>
 								<% if vendor.name.present? %>
-									<%= vendor.name  %>
+									<small><%= vendor.profile.name  %></small>
 								<% end %>
 							</h4>
 						</li>

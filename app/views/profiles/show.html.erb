@@ -5,25 +5,24 @@
 	<div class="col-lg-12">
 	<br>
 	<div class="panel panel-default  panel-border-black">
-			<div class="panel-heading">
-				<div class="container-fluid">
-					<div class="col-lg-10 col-md-8 col-sm-12">
-						<h3><%= @user.name  %><small> <%= @profile.name  %> </small></h3>
-					</div>
-					<div class="col-lg-2 col-md-4 col-sm-12 text-right">
-						<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Edit Profile</button>
-					</div>
-				</div>
-			</div>
-
 			<div class="panel-body light-blue">
 				<div class="container-fluid">
-					
+					<div class="row">
+						<div class="col-lg-10 col-md-8 col-sm-12">
+							<h2><%= @user.name  %> <small> <%= @profile.name  %> </small></h2>
+						</div>
+						<div class="col-lg-2 col-md-4 col-sm-12 text-right">
+							<% if current_user.id == @profile.user_id %>
+								<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Edit Profile</button>
+							<% end %>
+						</div>
+					</div>
+					<hr>
 						<div class="row">
 							<div class="col-lg-6 col-sm-12 col-xs-12">
 								<div class="row">
 									<div class="col-sm-4 col-xs-4">
-										<img src="<%= @user.profile.imageurl %>" width = "100%"%>
+										<img src="<%= @user.profile.imageurl %>"  class="img img-rounded" width = "100%"%>
 									</div>
 									<div class="col-sm-8 col-xs-8">
 										<h1><%= @profile.name %> <br> <small><%= @profile.message  %></small></h1>
@@ -63,9 +62,16 @@
 </div>
 
 
-<% if current_user.present? && current_user.role != "vendor" %>
+<% if current_user.present? && current_user.role == "organizer" %>
 <script>
 	$('#navbarUL').append("<li class='navbar-text pull-right'><a href='/organizer' >View your events</a></li>");
+
+</script>
+
+<% end %>
+<% if current_user.present? && current_user.role == "vendor" %>
+<script>
+	$('#navbarUL').append("<li class='navbar-text pull-right'><a href='/vendor' >View events</a></li>");
 
 </script>
 
