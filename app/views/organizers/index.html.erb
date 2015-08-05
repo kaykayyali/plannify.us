@@ -6,7 +6,7 @@
 	<div  class="col-lg-12">
 		<div class="row">
 			<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8" >
-				<h1>Event's for <%= pretty_date2(@date)  %></h1>
+				<h2>Event's for <span class="highlight"><%= pretty_date2(@date)%></span></h2>
 			</div>
 			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
 			<br>
@@ -17,7 +17,7 @@
 			</div>
 		</div>
 	<hr>
-	<br>		
+	<br>				
 						<% if @events.present? %>
 						<% columncounter = 0 %>
 						<% @events.each do |event| %>
@@ -59,6 +59,13 @@
 							<%  columncounter = 0 %>
 							<% end %>
 						<% end %>
+						<% else %>
+							<p>
+								There are no events for today. 
+								<% if current_user.role == "organizer" %>
+									You can add one by by clicking <a href="/organizes/addevent">Add New Event!</a>
+								<% end %>
+							</p>
 						<% end %>
 						
 					</div>

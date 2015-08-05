@@ -1,9 +1,9 @@
 <div class="container wow fadeInLeft animated">
 	<div class="row">
-		<div class="col-lg-8">
+		<div class="col-lg-9">
 			<h2>Events <span class="highlight">Calendar</span></h2>
 		</div>
-		<div class="col-lg-4" data-hook="buttonDiv">
+		<div class="col-lg-3" data-hook="buttonDiv">
 			
 		</div>
 	</div>
@@ -31,7 +31,7 @@
 
 <% if current_user.role == "vendor" %>
 <script>
-$('[data-hook~="buttonDiv"]').append(" <a class='btn btn-primary' style='margin-top:10px;' href='<%= '/vendor/' + Date.today.to_s %>'>Today's Events</a>");
+$('[data-hook~="buttonDiv"]').append(" <br><a class='btn btn-primary text-right' href='<%= '/vendor/' + Date.today.to_s %>'>Today's Events</a>");
 
 
 $(document).ready(function() {
@@ -80,8 +80,8 @@ $(document).ready(function() {
 
 
 <script>
-$('[data-hook~="buttonDiv"]').append("<a class='btn btn-primary' style='margin-top:10px;' href='<%= organizers_addevent_path %>'>Add Event</a> ");
-$('[data-hook~="buttonDiv"]').append(" <a class='btn btn-primary' style='margin-top:10px;' href='<%= '/organizer/' + Date.today.to_s %>'>Today's Events</a>");
+$('[data-hook~="buttonDiv"]').append("<br><a class='btn btn-primary text-right'  href='<%= organizers_addevent_path %>'>Add Event</a> ");
+$('[data-hook~="buttonDiv"]').append("<a class='btn btn-primary text-right' ' href='<%= '/organizer/' + Date.today.to_s %>'>Today's Events</a>");
 
 
 $(document).ready(function() {

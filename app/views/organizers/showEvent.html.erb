@@ -2,17 +2,20 @@
 <div class="container-fluid wow fadeInLeft animated">
 
 	
-	<div class="col-lg-11 center-block">
+	<div class="col-lg-11 center-block"> 
 	<br>
 	<div class="panel panel-default  panel-border-black">
 			
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-10">
-						<h4>Details for <span class='highlight'><b><a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=<%= @event.name%>"><%= @event.name %></a></b></span></h4>
+						<h3>Details for <span class='highlight'><b><a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=<%= @event.name%>"><%= @event.name %></a></b></span></h3>
 					</div>
 					<div class="col-lg-2">
-						<a href="<%= calendar_path  %>" class="btn btn-primary">Back to calendar</a>
+
+						<ul class="list-unstyled list-inline pull-left">
+							<li><a href="<%= calendar_path  %>" class="btn btn-primary">Back to calendar</a></li>
+						</ul>
 					</div>
 				</div>
 				<hr>
@@ -103,7 +106,7 @@
 				  <!-- Tab panes -->
 				  <div class="tab-content">
 				    <div role="tabpanel" class="tab-pane " id="comments">
-				    	<div class="col-md-12 " id="commentList">
+				    	<div id="commentList">
 							<div class="react_comments">
 								<%= react_component('CommentBox', props = {:url => "/api/events/#{@event.id}/comments", :pollInterval => 5000}) %>
 							</div>	
