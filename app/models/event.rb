@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
   	validates :state, presence: true
   	validates :guestcount, presence: true
   	def init
-      self.confirmed  = false           #will set the default value only if it's nil
+      self.confirmed  ||= false           #will set the default value only if it's nil
     end
 end
  

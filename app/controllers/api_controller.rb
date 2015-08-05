@@ -1,5 +1,18 @@
 class ApiController < ApplicationController
 	before_action(:authenticate_user!)
+	def confirm_event
+		event = Event.find_by_id(params[:id])
+		event.confirmed = true
+		event.save
+		vendor_names = event.confirmed_services.map { |cs| cs.vendor.profile.name }
+		vendor_names.each do |vendor_name|
+			body = "#{current_user.name} has confimed #{vendor_name} for #{event.name}"
+			Comment.create(event_id: params[:id], user_id: current_user.id, content: body )
+		end
+
+
+		redirect_to organizers_event_path(event.id)
+	end
 	def get_comments
 
 		event = Event.find_by(:id => params[:id])

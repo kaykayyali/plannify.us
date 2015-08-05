@@ -67,10 +67,6 @@ class OrganizersController < ApplicationController
 		end
 		
 	end
-	def examine_vendor
-		@vendor = User.find_by(:id => params[:id])
-		render 'examinevendor'
-	end
 
 	private
 

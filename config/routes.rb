@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       
       get '/organizers/addevent' => 'organizers#new' 
       post '/organizers/addevent' => 'organizers#create'
-      get '/organizers/showevent/:id' => 'organizers#event_show'
+      get '/organizers/showevent/:id' => 'organizers#event_show', as: :organizers_event
       delete 'organizer/deleteevent/:id' => 'organizers#event_delete'
       get '/organizers/examinevendor/:id' => 'organizers#examine_vendor'
       get '/organizers/:id' => 'organizers#show'
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   post '/api/events/:id/comments' => 'api#add_comments', as: :add_comment
   get '/api/vendors/vendorinfo/:id' => 'api#vendor_info'
   delete '/api/event/:id/deleteconfirmedservice/:service_id' => 'api#delete_confirmed_service'
-
+  post '/api/event/confirm/:id' => 'api#confirm_event'
   post '/api/events/addservice' => 'api#add_service'
 #profiles
   get '/profiles/:id' => 'profiles#show', as: :profile

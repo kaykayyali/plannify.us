@@ -8,8 +8,11 @@
 			
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-10">
 						<h4>Details for <span class='highlight'><b><a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=<%= @event.name%>"><%= @event.name %></a></b></span></h4>
+					</div>
+					<div class="col-lg-2">
+						<a href="<%= calendar_path  %>" class="btn btn-primary">Back to calendar</a>
 					</div>
 				</div>
 				<hr>
@@ -27,29 +30,54 @@
 						<h4>Guest Count: <%= @event.guestcount.to_s  %></h4>
 					</p>
 					<br>
-					<% if @event.confirmed == false %>
-					<button  data-toggle="modal" data-target="#addserviceModal" class="btn btn-default">
-						Add a service
-					</button>
-					<% end %>
-					<button  data-toggle="modal" data-target="#viewservicesModal" class="btn btn-default">
-						View services
-					</button>
-					<a class="btn btn-default" href='#'type='button' data-toggle='modal' data-target='#vendorsModal'>Local Vendors</a>
-					<% if @event.confirmed == true %>
-					<% disable = "disabled"  %>
-					<% buttontext = "Confirmed" %>
-					<% else %>
-					<% buttontext = "Confirm Event" %>
-					<% end %>
-					<button  class="btn btn-success <%= disable%>" onclick="handleConfirm" id ='<%= @event.id %>' >
-						<%= buttontext  %>
-					</button>
+					<hr>
+					<ul class="list-inline">
+					<li>
+						<div class="btn-group">
+						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    Event Options <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu">
+						    <li>
+							    <% unless @event.confirmed == true %>
+								<a  href="#" data-toggle="modal" data-target="#addserviceModal" >
+									Add a service
+								</a>
+								<% end %>
+							</li>
+						    <li>
+						    	<a  href="#" data-toggle="modal" data-target="#viewservicesModal" >
+									View services
+								</a>
+							</li>
+							<li>
+								<a href='#'type='button' data-toggle='modal' data-target='#vendorsModal'>
+									Local Vendors
+								</a>
+							</li>
+						    <li>
+						    	
+						    </li>
+						  </ul>
+						</div>
+					</li>
+							<% if @event.confirmed == true %>
+								<% disable = "disabled"  %>
+								<% buttontext = "Confirmed" %>
+							<% else %>
+								<% buttontext = "Confirm Event" %>
+							<% end %>
+
+							<li>
+								<%= form_tag("/api/event/confirm/#{@event.id}", :method => "post", :class => "inline-block") do %>
+									<%= submit_tag("#{buttontext}", :class => "btn btn-success #{disable}") %>
+								<% end %>
+							</li>
 					
 					<br>
-					<hr>
+					
 
-					<a href="<%= calendar_path  %>" class="btn btn-primary">Back to calendar</a>
+					
 					
 				</div>
 
@@ -77,7 +105,7 @@
 				    <div role="tabpanel" class="tab-pane " id="comments">
 				    	<div class="col-md-12 " id="commentList">
 							<div class="react_comments">
-								<%= react_component('CommentBox', props = {:url => "/api/events/#{@event.id}/comments", :pollInterval => 1000}) %>
+								<%= react_component('CommentBox', props = {:url => "/api/events/#{@event.id}/comments", :pollInterval => 10000}) %>
 							</div>	
 						</div>
 				    </div>
@@ -256,3 +284,8 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<script>
+function handleConfirm(event) {
+		$.post("/api/event/confirm/"+event.target.id)
+	}
+</script>
