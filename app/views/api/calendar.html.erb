@@ -8,10 +8,19 @@
 	<hr>
 </div>
 </div>
+<div class="container">
+	<div class="col-lg-6 center-block text-center">
+		<div id="loading" style="position:absolute">
+			<%= image_tag("loading.gif")%>
+		</div>
+	</div>
+</div>
 <div class="container wow fadeInLeft animated calendar">
 	<div class="row">
 		<div class="col-xl-12 col-lg-12 " >
+			<!-- <div id="cool"> -->
 				<div id='calendar' ></div>
+			<!-- </div>	 -->
 		</div>
 	</div>
 </div>
@@ -47,7 +56,17 @@ $(document).ready(function() {
 
 		dayClick: function(date, jsEvent, view) {
 	        window.location.replace("/vendor/"+ date.format())
-	    }
+	    },
+	    loading: function(bool){
+    		if (bool){
+    			
+    		
+    		} else{
+    			$('#loading').hide();
+    			
+    			$('#calendar').fullCalendar('render');
+    		}
+    	},
 
 		   
     })

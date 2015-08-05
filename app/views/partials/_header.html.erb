@@ -56,8 +56,10 @@ nav ul {
         <h4 class="modal-title">Your messages</h4>
       </div>
       <div class="modal-body">
-     	<div class="messageBoxComponent light-blue">
+     	<div class="messageBoxComponent">
+     	<% if current_user.present? %>
 		<%= react_component('MessageBox', props = {:url => "/api/message/#{current_user.id}/messages", :pollInterval => 3000}) %>	
+		<% end %>
 		</div>
       </div>
       <div class="modal-footer">
