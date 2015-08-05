@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   delete '/api/event/:id/deleteconfirmedservice/:service_id' => 'api#delete_confirmed_service'
   post '/api/event/confirm/:id' => 'api#confirm_event'
   post '/api/events/addservice' => 'api#add_service'
+  get '/api/messages/unread_count/:id' => 'api#unread_get'
+  get '/api/messages/confirm_all/:id' => "api#confirm_all"
 #profiles
   get '/profiles/:id' => 'profiles#show', as: :profile
   put '/profiles/:id' => 'profiles#update'

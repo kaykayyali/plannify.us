@@ -1,13 +1,26 @@
 class ApiController < ApplicationController
 	before_action(:authenticate_user!)
+	def unread_get
+		user = User.find_by_id(params[:id])
+		render json: {count: user.messages_to.unread.count}
+	end
+	def confirm_all
+		user = User.find_by_id(params[:id])
+		user.messages_to.unread.map do |msg| 
+			msg.read = true
+			msg.save
+		end
+		render json: {response: "Complete"}, status: 200
+	end
 	def confirm_event
 		event = Event.find_by_id(params[:id])
 		event.confirmed = true
 		event.save
-		vendor_names = event.confirmed_services.map { |cs| cs.vendor.profile.name }
-		vendor_names.each do |vendor_name|
-			body = "#{current_user.name} has confimed #{vendor_name} for #{event.name}"
+		vendors = event.confirmed_services.map { |cs| cs.vendor }
+		vendors.each do |vendor|
+			body = "#{current_user.name} has confimed #{vendor.name} for #{event.name}"
 			Comment.create(event_id: params[:id], user_id: current_user.id, content: body )
+			Message.create(from_id: current_user.id, to_id: vendor.id, content: body)
 		end
 
 
@@ -122,7 +135,7 @@ class ApiController < ApplicationController
 	def send_confirmation
 		if current_user.present?
 
-			message = Message.new
+			message = Message.create()
 			messageContent = User.find_by(:id => current_user.id).first_name + " has confirmed you as a provider for " + Event.find_by(:id => params[:event_id]).name + "."
 			message.content = messageContent
 			message.from_id = current_user.id

@@ -1,6 +1,6 @@
 
 	$(function(){
-
+		
 	
 
 		$('a[data-remote]').on("ajax:success", function(event, data, status, xhr) {

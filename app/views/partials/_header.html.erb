@@ -27,7 +27,8 @@ nav ul {
 					<li class="navbar-text pull-right">
 						<div class="btn-group">
 							<% if current_user.role == "vendor" %>
-								<button class='btn btn-primary' type='button' data-toggle='modal' data-target='#messagesModal'>View Messages</button>
+								<button class='btn btn-primary' onClick="handleConfirm()" type='button' data-toggle='modal' data-target='#messagesModal'><%= react_component('MessageBadge', props = {:url => "/api/messages/unread_count/#{current_user.id}", :pollInterval => 2000} ) %></button>
+								
 							<% end %>
 						</div>
 						<div class="btn-group">
@@ -58,7 +59,9 @@ nav ul {
       <div class="modal-body">
      	<div class="messageBoxComponent">
      	<% if current_user.present? %>
-		<%= react_component('MessageBox', props = {:url => "/api/message/#{current_user.id}/messages", :pollInterval => 3000}) %>	
+     		<% if current_user.role == "vendor" %>
+			<%= react_component('MessageBox', props = {:url => "/api/message/#{current_user.id}/messages", :pollInterval => 3000}) %>	
+			<% end %>
 		<% end %>
 		</div>
       </div>
@@ -69,6 +72,10 @@ nav ul {
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-
+<script>
+function handleConfirm(){
+	$.get('/api/messages/confirm_all/<%= current_user.id %>')
+}
+</script>
 
 
