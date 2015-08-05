@@ -35,6 +35,7 @@
 					<button  data-toggle="modal" data-target="#viewservicesModal" class="btn btn-default">
 						View services
 					</button>
+					<a class="btn btn-default" href='#'type='button' data-toggle='modal' data-target='#vendorsModal'>Local Vendors</a>
 					<% if @event.confirmed == true %>
 					<% disable = "disabled"  %>
 					<% buttontext = "Confirmed" %>
@@ -226,3 +227,32 @@
 	assignColor()
 </script>
 
+<div class="modal fade" id="vendorsModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Vendors In Your Area</h4>
+      </div>
+      <div class="modal-body">
+      <ul class="list-unstyled">
+					<% @vendors.each do |vendor| %>
+						<li>
+							<h4 style="display:inline;"> 
+								<a href="<%= profile_path(vendor.id)  %>" ><b><%= vendor.name  %></b>
+								</a>
+								<% if vendor.name.present? %>
+									<small><%= vendor.profile.name  %></small>
+								<% end %>
+							</h4>
+						</li>
+						<hr>
+					<% end %>
+				</ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

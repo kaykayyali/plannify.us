@@ -6,7 +6,7 @@
 	<div  class="col-lg-12">
 		<div class="row">
 			<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8" >
-				<h1>Todays Event's</h1>
+				<h1>Event's for <%= pretty_date2(@date)  %></h1>
 			</div>
 			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
 			<br>
@@ -73,39 +73,8 @@
 
 
 
-<div class="modal fade" id="vendorsModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Vendors In Your Area</h4>
-      </div>
-      <div class="modal-body">
-      <ul class="list-unstyled">
-					<% @vendors.each do |vendor| %>
-						<li>
-							<h4 style="display:inline;"> 
-								<a href="<%= profile_path(vendor.id)  %>" ><b><%= vendor.name  %></b>
-								</a>
-								<% if vendor.name.present? %>
-									<small><%= vendor.profile.name  %></small>
-								<% end %>
-							</h4>
-						</li>
-						<hr>
-					<% end %>
-				</ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
 <script>
-  $('#navbarUL').append("<li class='navbar-text pull-right'><a href='#'type='button' data-toggle='modal' data-target='#vendorsModal'>View Vendors</a></li>");
+ 
 
 	$(".btn-edit").hover(
 		function(){$(this).parent().css("background-color","rgba(243,57,57,0.5)");

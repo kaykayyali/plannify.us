@@ -1,6 +1,9 @@
 <div class="container wow fadeInLeft animated">
-	<div class="col-lg-3 center-block text-center">
+	<div class="col-lg-8">
 		<h2>Events <span class="highlight">Calendar</span></h2>
+	</div>
+	<div class="col-lg-4" data-hook="buttonDiv">
+		
 	</div>
 	<hr>
 </div>
@@ -17,7 +20,8 @@
 
 <% if current_user.role == "vendor" %>
 <script>
-$('#navbarUL').append("<li class='navbar-text pull-right'><a href='<%= '/vendor/' + Date.today.to_s %>'>Today's Events</a></li>");
+$('[data-hook~="buttonDiv"]').append(" <a class='btn btn-primary' style='margin-top:10px;' href='<%= '/vendor/' + Date.today.to_s %>'>Today's Events</a>");
+
 
 $(document).ready(function() {
 
@@ -55,8 +59,8 @@ $(document).ready(function() {
 
 
 <script>
-$('#navbarUL').append("<li class='navbar-text pull-right'><a href='<%= organizers_addevent_path %>'>Add Event</a></li>");
-$('#navbarUL').append("<li class='navbar-text pull-right'><a href='<%= '/organizer/' + Date.today.to_s %>'>Today's Events</a></li>");
+$('[data-hook~="buttonDiv"]').append("<a class='btn btn-primary' style='margin-top:10px;' href='<%= organizers_addevent_path %>'>Add Event</a> ");
+$('[data-hook~="buttonDiv"]').append(" <a class='btn btn-primary' style='margin-top:10px;' href='<%= '/organizer/' + Date.today.to_s %>'>Today's Events</a>");
 
 
 $(document).ready(function() {

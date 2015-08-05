@@ -6,7 +6,7 @@ class OrganizersController < ApplicationController
 		date = Date.parse(params[:date])
 		searchDate = DateTime.new(date.year, date.month, date.day)
 		@events = current_user.events.where('start_date BETWEEN ? AND ?', searchDate.beginning_of_day, searchDate.end_of_day).all
-		
+		@date = date
 		render 'index'
 	end
 

@@ -2,7 +2,13 @@
 body{
 	background-color: rgba(119,119,119,0.1)
 }
-		
+#header .navbar {
+	z-index: -10;
+	position: absolute;
+}
+nav ul {
+	overflow: visible;
+}	
 </style>
 
 
@@ -15,21 +21,51 @@ body{
 				<li class="pull-left"> <a class="logo" >Plannify.us</a></li>
 			</ul>
 			
-		<nav>
+	<nav>
 			<ul class="nav navbar-nav pull-right" style="padding:none;" id="navbarUL">
 				<% if current_user.present? %>
-					<li class="navbar-text pull-right">Signed in as <%= current_user.name %></li>
+					<li class="navbar-text pull-right">
+						<div class="btn-group">
+							<% if current_user.role == "vendor" %>
+								<button class='btn btn-primary' type='button' data-toggle='modal' data-target='#messagesModal'>View Messages</button>
+							<% end %>
+						</div>
+						<div class="btn-group">
+						  <button type="button" class="btn btn-info dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    Signed in as <%= current_user.name %><span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu z-fix">
+						    <li><a href="/profiles/<%= current_user.id %>">Profile</a></li>
+						    <li><a href="<%=destroy_user_session_path%>" data-method="delete">Sign-Out</a></li>
+						  </ul>
+						</div>
+					</li>
 					
-					<!-- Temp Sign out -->
-					
-					<li class="navbar-text pull-right"><a href="<%=destroy_user_session_path%>" data-method="delete">Sign-Out</a></li>
-					<li class="navbar-text pull-right"><a href="/profiles/<%= current_user.id %>">Profile</a></li>
+			
 				<% end %>
 			</ul>
 		</nav>
 		
 	</div>
 </header>
+<div class="modal fade" id="messagesModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Your messages</h4>
+      </div>
+      <div class="modal-body">
+     	<div class="messageBoxComponent light-blue">
+		<%= react_component('MessageBox', props = {:url => "/api/message/#{current_user.id}/messages", :pollInterval => 3000}) %>	
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 
