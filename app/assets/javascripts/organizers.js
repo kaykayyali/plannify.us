@@ -27,7 +27,7 @@
 				request.error(function(data){console.log(data)})
 				request.done(function(data){
 					$("#viewVendorModal").modal('hide')
-					$('.confirmedServicesList').append("<li class='fancify'data-hook='service:"+data.confirmed_service+"'><p><h3><span class='highlight'>"+data.vendor_name+"</span><small> " +data.service_name +"</small</h3></p></li>");
+					$('.confirmedServicesList').append("<li class='fancify'data-hook='service:"+data.confirmed_service+"'><p><h3><span class='highlight'><img src='"+data.image_url+"' class='img img-thumbnail' width='10%'><a href='/profiles/"+data.vendor_id+"'>"+data.vendor_name+"</a></span><small> " +data.service_name +"</small</h3></p></li>");
 					$("li[data-hook~='service:"+data.confirmed_service+"']").prepend("<a data-confirm='Are you sure?'' data-method='delete' class='btn btn-sm btn-danger pull-right btn-edit trig' id='"+data.vendor_name+"' data-remote='true' href='/api/event/"+data.event+"/deleteconfirmedservice/"+data.confirmed_service+"'>X</button")
 					console.log(data.vendor_name)
 					assignColor();

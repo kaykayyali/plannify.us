@@ -47,12 +47,10 @@ class ApiController < ApplicationController
 		event = Event.find_by(id: params[:eventid])
 		serv = Service.find_by(name: params[:service])
 		vendor = Profile.find_by(name: params[:name])
-		p event
-		p serv
-		p vendor
+		
 
 		associatedServ = AssociatedService.where(:service_id => serv.id, :user_id => vendor.user_id )
-		p associatedServ
+		
 
 
 		if associatedServ.present? && check_for_confirmed_service(event, associatedServ) == false
@@ -64,7 +62,8 @@ class ApiController < ApplicationController
 				vendor_name: vendor.name,
 				service_name: serv.name,
 				event: event.id,
-				vendor_id: vendor.id
+				vendor_id: vendor.id,
+				image_url: vendor.imageurl
 			}
 		else
 			render status: 300 , json: {response: "Failed"}

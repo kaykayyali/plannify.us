@@ -151,10 +151,10 @@
       			<% if @event.confirmed == false %>
       			<%= link_to 'X', "/api/event/#{@event.id}/deleteconfirmedservice/#{serv.id}", data: { :confirm => 'Are you sure?', method: :delete}, remote: true , :class => "btn btn-sm btn-danger pull-right btn-edit trig", :id => serv.associated_service.user.profile.name   %>
       			<% end %>
-      				
-	      				
-	      					<% association = AssociatedService.find_by(:id => serv.associated_service_id) %>
-	      					<h3><span class="highlight"><%= User.find_by(:id => association.user_id).profile.name  %></span>
+      						<% association = AssociatedService.find_by(:id => serv.associated_service_id) %>
+	      					<h3>
+	      					<img src="<%= User.find_by(:id => association.user_id).profile.imageurl%>" class="img img-thumbnail" width="10%">
+	      					<span class="highlight"><a href="/profiles/<%= User.find_by(:id => association.user_id).id %>"><%= User.find_by(:id => association.user_id).profile.name  %></a></span>
 	      					<small><%= Service.find_by(:id => association.service_id).name  %></small></h3>
 	      					
 	      			
