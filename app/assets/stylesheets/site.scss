@@ -32,3 +32,8 @@ td.fc-widget-content.fc-day:hover {
 		height:100%;
 	}
 }
+.slidy {
+	-webkit-transition:all 200ms ease-in;
+	-moz-transition:all 200ms ease-in;
+	transition:all 200ms ease-in;
+}

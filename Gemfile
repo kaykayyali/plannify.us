@@ -37,6 +37,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'pry'
 gem 'puma'
+gem 'faker'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
