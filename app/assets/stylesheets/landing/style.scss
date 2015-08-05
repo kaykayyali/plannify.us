@@ -345,10 +345,14 @@ section.homepage {
 	background-position:top center;
 	background-size:cover;
 	position:relative;
-	height:100vh;
 	overflow:hidden;
 	padding:90px 0;
 	background-attachment:fixed;
+}
+@media only screen and (min-device-width: 480px) {
+	section.homepage {
+		height:100vh;
+	}
 }
 .section-overlay-home {
 	background-color:rgba(0,0,0,0.6);

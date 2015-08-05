@@ -27,3 +27,8 @@ td.fc-widget-content.fc-day:hover {
 	padding: 10px;
 	border: lightgrey double 4px;
 }
+@media only screen and (max-device-width: 480px) {
+	section.homepage{
+		height:100%;
+	}
+}
