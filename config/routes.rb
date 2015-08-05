@@ -4,10 +4,9 @@ Rails.application.routes.draw do
 
   root 'site#index'
 #vendor
-    get '/vendor' => 'vendors#index'
+    get '/vendor/:date' => 'vendors#index'
         get '/vendors' => 'vendors#show'
         get '/vendors/examineevent/:id' => 'vendors#examine_event'
-        get '/vendors/examineorganizer/:id' => 'vendors#examine_organizer'
         
         
 
@@ -24,7 +23,7 @@ Rails.application.routes.draw do
     get '/staff' => 'staff#index'
 #api
   get '/api/events/:id/comments' => 'api#get_comments'
-  post '/api/events/:id/comments' => 'api#add_comments'
+  post '/api/events/:id/comments' => 'api#add_comments', as: :add_comment
   get '/api/vendors/vendorinfo/:id' => 'api#vendor_info'
   delete '/api/event/:id/deleteconfirmedservice/:service_id' => 'api#delete_confirmed_service'
 

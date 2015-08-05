@@ -14,7 +14,7 @@ class OrganizersController < ApplicationController
 		@organizer = User.find_by(:id => params[:id])
 		render 'show'
 	end
-
+ 
 	def new
 		
 		render 'new'

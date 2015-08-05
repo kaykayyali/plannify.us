@@ -3,27 +3,21 @@ class ApiController < ApplicationController
 	def get_comments
 
 		event = Event.find_by(:id => params[:id])
+		comments = event.comments.all.order(:id => :DESC)
 		commentsArray = []
 
-    	event.comments.each do |comment|
-    		textalign = "text-align:right;"
-    		color = "color:#c7254e;"
-    	
-    		if User.find_by(:id =>comment.user_id).role == "organizer"
-    			textalign = "text-align:left;"
-    			color = "color:#0E8FAB;"
-    		end
-
-    		styles = "style='"+ textalign + color + "'"
-
-	      commentFirstname = "<a href= '/profiles/#{comment.user_id}'"+styles + ">" + User.find_by(:id => comment.user_id).first_name
-	      commentLastname = User.find_by(:id => comment.user_id).last_name + "</a>"
-	      commentUsername = commentFirstname + " " + commentLastname
-	      
+    	comments.each do |comment|
+	      commentUsername = User.find_by(:id => comment.user_id).name 
+	      content_fix = comment.content
+	      if comment.content.nil?
+	      	content_fix = ""
+	      end
 	      newComment = {
 	          :user => commentUsername,
-	          :content => comment.content,
-	          :date => format_date(comment.created_at)
+	          :content => content_fix,
+	          :date => format_date(comment.created_at),
+	          :role => User.find_by(:id => comment.user_id).role,
+	          :companyName => User.find_by(:id => comment.user_id).profile.name
 	      }
 
 	      commentsArray.push(newComment)
@@ -169,8 +163,9 @@ class ApiController < ApplicationController
 	def send_events
 		if current_user.role == "organizer"
 			eventFilter = current_user.events
+			url_to = '/organizers/showevent/'
 		elsif current_user.role == "vendor"
-
+			url_to ='/vendors/examineevent/'
 			eventFilter = Event.all.where(:confirmed => false)
 		end
 		events = eventFilter
@@ -179,7 +174,7 @@ class ApiController < ApplicationController
 			newEvent = {
 				title: event.name,
 				start: event.start_date,
-				url: '/organizers/showevent/' + event.id.to_s,
+				url: url_to + event.id.to_s,
 				allDay: false,
        			editable: true
 			}
