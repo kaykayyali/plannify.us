@@ -35,7 +35,7 @@
 					<button  data-toggle="modal" data-target="#myModal" class="btn btn-default">
 						View Service providers
 					</button>
-					<%= link_to 'Offer my services!', add_comment_path( :text => 'My company would like to offer our services for this event!'), data: { :confirm => 'Are you sure?', method: :post}, remote: true , :class => "btn btn-sm btn-success btn-edit", :style =>"z-index: 30;"   %>
+					<%= link_to 'Offer my services!', add_comment_path( :text => 'My company would like to offer our services for this event!'), data: { :confirm => 'Are you sure?', method: :post, toggle: :tab }, remote: true , :class => "btn btn-sm btn-success btn-edit", :style =>"z-index: 30;"   %>
 				</div>
 				
 				<style>
@@ -49,21 +49,21 @@
 				</style>
 				<div class="col-md-6">
 						<ul class="nav nav-tabs" role="tablist">
-						  	<li role="presentation" class="active"><a href="#map" aria-controls="map" role="tab" data-toggle="tab">Map</a></li>
-						    <li role="presentation"><a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Comments</a></li>
+							<li role="presentation" class="active"><a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Comments</a></li>
+						  	<li role="presentation" ><a href="#map" aria-controls="map" role="tab" data-toggle="tab">Map</a></li>
 						 </ul>
 
 					  <!-- Tab panes -->
 					  <div class="tab-content">
-					    <div role="tabpanel" class="tab-pane " id="comments">
+					   <div role="tabpanel" class="tab-pane" id="map">
+					    	<img src="https://maps.googleapis.com/maps/api/staticmap?markers=color:red%7Clabel:S%7C<%= @event.address%>&size=600x300&maptype=roadmap&zoom=15" class="img img-thumbnail">
+					    </div>
+					    <div role="tabpanel" class="tab-pane active" id="comments">
 					    	<div class="col-md-12 " id="commentList">
 								<div class="react_comments">
 									<%= react_component('CommentBox', props = {:url => "/api/events/#{@event.id}/comments", :pollInterval => 1000}) %>
 								</div>	
 							</div>
-					    </div>
-					    <div role="tabpanel" class="tab-pane active" id="map">
-					    	<img src="https://maps.googleapis.com/maps/api/staticmap?markers=color:red%7Clabel:S%7C<%= @event.address%>&size=600x300&maptype=roadmap&zoom=15" class="img img-thumbnail">
 					    </div>
 					  </div>
 					</div>

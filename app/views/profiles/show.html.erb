@@ -64,14 +64,14 @@
 
 <% if current_user.present? && current_user.role == "organizer" %>
 <script>
-	$('#navbarUL').append("<li class='navbar-text pull-right'><a href='/organizer' >View your events</a></li>");
+	$('#navbarUL').append("<li class='navbar-text pull-right'><a href='<%= calendar_path %>' >View calendar</a></li>");
 
 </script>
 
 <% end %>
 <% if current_user.present? && current_user.role == "vendor" %>
 <script>
-	$('#navbarUL').append("<li class='navbar-text pull-right'><a href='/vendor' >View events</a></li>");
+	$('#navbarUL').append("<li class='navbar-text pull-right'><a href='<%= calendar_path %>' >View calendar</a></li>");
 
 </script>
 

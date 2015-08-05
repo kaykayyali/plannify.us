@@ -153,8 +153,8 @@
       				<p>
 	      				
 	      					<% association = AssociatedService.find_by(:id => serv.associated_service_id) %>
-	      					<h3><span class="highlight"><%= User.find_by(:id => association.user_id).name  %></span>
-	      					<%= Service.find_by(:id => association.service_id).name  %></h3>
+	      					<h3><span class="highlight"><%= User.find_by(:id => association.user_id).profile.name  %></span>
+	      					<small><%= Service.find_by(:id => association.service_id).name  %></small></h3>
 	      					
 	      			
 	      			</p>
