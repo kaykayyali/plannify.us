@@ -35,7 +35,25 @@
 					<button  data-toggle="modal" data-target="#myModal" class="btn btn-default">
 						View Service providers
 					</button>
-					<%= link_to 'Offer my services!', add_comment_path( :text => 'My company would like to offer our services for this event!'), data: { :confirm => 'Are you sure?', method: :post, toggle: :tab }, remote: true , :class => "btn btn-sm btn-success btn-edit offer", :style =>"z-index: 30;", :id => @event.id   %>
+					<% unless @event.confirmed %>
+					<%= link_to 'Offer my services!', add_comment_path( :text => 'My company would like to offer our services for this event!'), data: { :confirm => 'Are you sure?', method: :post, toggle: :tab }, remote: true , :class => "btn btn-sm btn-success btn-edit offer offerbtn", :style =>"z-index: 30;", :id => @event.id   %>
+					<script>
+					function checkForFalse(){
+						console.log('initiated')
+						$.get('/api/events/'+<%= @event.id %>+'/check_confirmed', handleResponse)
+
+						function handleResponse(data){
+							if (data.response === "confirmed") {
+								$('.offerbtn').addClass('disabled')
+								$('.offerbtn').removeClass('btn-success')
+								$('.offerbtn').addClass('btn-danger')
+								$('.offerbtn').text('Event Confirmed')
+							}
+						}
+					}
+					setInterval(checkForFalse, 2000)
+					</script>
+					<% end %>
 				</div>
 				
 				<style>

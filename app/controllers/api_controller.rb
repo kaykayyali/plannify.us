@@ -189,13 +189,20 @@ class ApiController < ApplicationController
 	def calendar
 		render 'calendar'
 	end
+	def check_confirmed
+		response = "confirmed"
+		unless Event.find_by_id(params[:id]).confirmed 
+			response = "open"
+		end
+		render json: {response: response}
+	end
 	def send_events
 		if current_user.role == "organizer"
 			eventFilter = current_user.events
 			url_to = '/organizers/showevent/'
 		elsif current_user.role == "vendor"
 			url_to ='/vendors/examineevent/'
-			eventFilter = Event.all.where(:confirmed => false)
+			eventFilter = Event.all
 		end
 		events = eventFilter
 		eventsArray = []

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   post '/api/events/addservice' => 'api#add_service'
   get '/api/messages/unread_count/:id' => 'api#unread_get'
   get '/api/messages/confirm_all/:id' => "api#confirm_all"
+  get '/api/events/:id/check_confirmed' => 'api#check_confirmed'
 
 #profiles
   get '/profiles/:id' => 'profiles#show', as: :profile

@@ -108,7 +108,7 @@
 				    <div role="tabpanel" class="tab-pane " id="comments">
 				    	<div id="commentList">
 							<div class="react_comments">
-								<%= react_component('CommentBox', props = {:url => "/api/events/#{@event.id}/comments", :pollInterval => 5000}) %>
+								<%= react_component('CommentBox', props = {:url => "/api/events/#{@event.id}/comments", :pollInterval => 1000}) %>
 							</div>	
 						</div>
 				    </div>
