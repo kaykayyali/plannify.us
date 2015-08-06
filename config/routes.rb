@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     get '/vendor/:date' => 'vendors#index'
         get '/vendors' => 'vendors#show'
         get '/vendors/examineevent/:id' => 'vendors#examine_event'
-        
+        get '/vendor/events/servicing' => 'vendors#servicing'
         
 
 #organizers

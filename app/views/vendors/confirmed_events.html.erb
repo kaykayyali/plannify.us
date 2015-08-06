@@ -1,0 +1,89 @@
+
+<style>
+	.label-edit {
+		position: absolute;
+		top: 15px;
+		right: 28px;
+	}
+</style>
+<div class="container-fluid wow fadeInLeft animated">
+
+	
+	
+	<div class="col-lg-12">
+
+		<div class="row">
+			<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8" >
+				<h1>Confirmed Events</h1>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+			<br>
+        <ul class="list-unstyled list-inline pull-left">
+          <li><a href="<%= calendar_path  %>" class= "btn btn-primary btn-md"style="color:white;">Back to Calendar</a></li>
+        </ul>
+			</div>
+		</div>
+	<hr>
+	<br>
+		<% if @events.present? %>
+			<% @events.each do |event| %>
+				<div class="col-lg-3" style="position:relative;">
+					<a href="/vendors/examineevent/<%= event.id %>" style='color:black;'>
+						<div class="panel panel-default panel-border-grey ex1 text-center">
+							<div class="panel-body">
+								<% servicing = false %>
+								<% event.confirmed_services.each do |serv| %>
+									<% association = AssociatedService.find_by(:id => serv.associated_service_id) %>
+									<% if association.service_id = current_user.id %>
+										<% servicing = true %>
+									<% end %>
+								<% end %>
+								<h4><%= event.name  %> <br> <small><%= event.venue  %></small></h4> <% if servicing == true%>
+								<span class="label label-success label-edit">Servicing</span>
+								<style> .ex1 {background-color: rgba(92,184,92,0.2)}</style>
+								<% end %>
+								<hr>
+								Posted by: <%= User.find_by(:id => event.user_id).first_name  %> <%= User.find_by(:id => event.user_id).last_name  %><br>
+								Start time: <%= pretty_date(event.start_date)  %> <br>
+								
+								<%= event.city  %>, <%= event.state  %> <br>
+								<%= event.address %>
+								<%= event.zipcode  %>
+							</div>
+						</div>
+					</a>
+				</div>
+			<% end %>
+			<% else %>
+							<h2>Whoopss...
+									<small>There are no events for this date.</small>
+							</h2>
+		<% end %>
+	</div>
+</div>
+
+
+<div class="modal fade" id="organizersModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Organizers In Your Area</h4>
+      </div>
+      <div class="modal-body">
+     	<ul class="list-unstyled">
+			<% @organizers.each do |organizer|  %>
+				<li>
+				<h4 style="display: inline"><a href="<%= profile_path(organizer.id)  %>" ><b><%= organizer.first_name  %> <%= organizer.last_name  %></b></a></h4>
+				</li>
+				<hr>
+			<%  end %>
+		</ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+

@@ -48,6 +48,7 @@
 								$('.offerbtn').removeClass('btn-success')
 								$('.offerbtn').addClass('btn-danger')
 								$('.offerbtn').text('Event Confirmed')
+								setTimeout(function(){location.reload();}, 2000)
 							}
 						}
 					}
@@ -114,6 +115,7 @@
       			<p class="lead">
 	      				
 	      					<% association = AssociatedService.find_by(:id => serv.associated_service_id) %>
+	      					<img src="<%= User.find_by(:id => association.user_id).profile.imageurl%>" class="img img-thumbnail" width="10%">
 	      					<%= Service.find_by(:id => association.service_id).name  %> 
 							<span class="highlight"> <a href='/profiles/<%= association.user_id%>'><%= User.find_by(:id => association.user_id).profile.name  %></a> </span>
 	      					

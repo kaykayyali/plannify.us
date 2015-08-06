@@ -22,7 +22,7 @@ class ApiController < ApplicationController
 		event.save
 		vendors = event.confirmed_services.map { |cs| cs.vendor }
 		vendors.each do |vendor|
-			body = "#{current_user.name} has confimed #{vendor.name} for #{event.name}"
+			body = "#{current_user.name} has confimed #{vendor.profile.name} for #{event.name}"
 			Comment.create(event_id: params[:id], user_id: current_user.id, content: body )
 			Message.create(from_id: current_user.id, to_id: vendor.id, content: body)
 		end

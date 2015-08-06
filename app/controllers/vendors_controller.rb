@@ -19,7 +19,13 @@ class VendorsController < ApplicationController
 		@organizer = User.find_by(:id => @event.user_id)
 		render 'examineevent'
 	end
-	
+	def servicing
+		@organizers = User.where(role: "organizer")
+		@vendors = User.where(:role => 'vendor')
+		@events = current_user.events_scheduled(current_user.id)
+		render 'confirmed_events'
+		
+	end
 
 
  

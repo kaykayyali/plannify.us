@@ -16,7 +16,18 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
 
 
-
+def events_scheduled(cur_id)
+  events_confirmed = []
+  Event.all.each do |event|
+    event.confirmed_services.each do |confirmed_service|
+      if confirmed_service.vendor.id == 2 && event.confirmed == true
+        p 'confirmed'
+        events_confirmed.push(event)
+      end
+    end
+  end
+    events_confirmed
+end
 def name
   return "#{first_name} #{last_name}"
 end

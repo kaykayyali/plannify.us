@@ -32,6 +32,7 @@
 <% if current_user.role == "vendor" %>
 <script>
 $('[data-hook~="buttonDiv"]').append(" <br><a class='btn btn-primary text-right' href='<%= '/vendor/' + Date.today.to_s %>'>Today's Events</a>");
+$('[data-hook~="buttonDiv"]').append(" <a class='btn btn-primary text-right' href='<%= '/vendor/events/servicing' %>'>Events Servicing</a>");
 
 
 $(document).ready(function() {
