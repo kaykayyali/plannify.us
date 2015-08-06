@@ -12,6 +12,10 @@ class ApiController < ApplicationController
 		end
 		render json: {response: "Complete"}, status: 200
 	end
+	def redact
+		Event.find_by_id(params[:id]).comments.where(:content => "My company would like to offer our services for this event!").where(:user_id => current_user.id).destroy_all
+		render json: {response: "Complete"}, status: 200
+	end
 	def confirm_event
 		event = Event.find_by_id(params[:id])
 		event.confirmed = true

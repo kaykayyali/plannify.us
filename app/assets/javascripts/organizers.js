@@ -1,7 +1,31 @@
 
 	$(function(){
-		
-	
+		offer()
+	function offer(){
+		$('.offer').on("ajax:success", function(event, data, status, xhr) {
+			$('.offer').removeClass('btn-success')
+			$('.offer').addClass('btn-danger')
+			$('.offer').addClass('redact')
+			event_id = $('.offer').prop('id')
+			$('.offer').removeClass('offer')
+			$('.redact').text('Redact your offer');
+			$('.redact').prop('href', '/api/events/'+event_id+'/comments/redact')
+			redact();
+		});
+	}
+function redact(){
+		$('.redact').on("ajax:success", function(event, data, status, xhr) {
+			
+			$('.redact').removeClass('btn-danger')
+			$('.redact').addClass('btn-success')
+			$('.redact').addClass('offer')
+			event_id = $('.redact').prop('id')
+			$('.offer').removeClass('redact')
+			$('.offer').text('Offer your Services');
+			$('.offer').prop('href', '/api/events/56/comments?text=My+company+would+like+to+offer+our+services+for+this+event%21')
+		offer();
+		});
+	}
 
 		$('a[data-remote]').on("ajax:success", function(event, data, status, xhr) {
 				
